@@ -73,7 +73,7 @@ export default function ContactPage() {
               Contact Us
             </h1>
             <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2 mt-4 mb-8">
-              <p className="font-thin text-maroon-800">Let's talk about how we can help your business grow with AI</p>
+              <p className="font-thin text-maroon-800">Let&apos;s talk about how we can help your business grow with AI</p>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function ContactPage() {
                         Thank you for reaching out!
                       </h3>
                       <p className="text-maroon-800 text-center">
-                        We've received your message and will get back to you as soon as possible.
+                        We&apos;ve received your message and will get back to you as soon as possible.
                       </p>
                       <div className="text-center mt-8">
                         <GradientButton 
@@ -280,7 +280,7 @@ export default function ContactPage() {
             <div className="mt-16 text-center">
               <div className="w-full h-px bg-black/10 mb-12"></div>
               <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
-                <p className="font-thin text-maroon-800 italic">"Let's build smarter systems together."</p>
+                <p className="font-thin text-maroon-800 italic">&quot;Let&apos;s build smarter systems together.&quot;</p>
               </div>
             </div>
           </div>

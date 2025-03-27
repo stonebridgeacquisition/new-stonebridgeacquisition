@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { GradientButton } from "@/components/ui/gradient-button";
@@ -532,6 +532,35 @@ const generateAIAudit = (surveyData: any): Promise<AuditResult> => {
 };
 
 export default function ThankYouPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-maroon-50">
+        <div className="py-20">
+          <div className="container mx-auto px-4 text-center">
+            <Card className="max-w-3xl mx-auto shadow-lg border-maroon-200">
+              <CardContent className="p-8 md:p-12">
+                <h1 className="text-3xl md:text-4xl font-bold text-maroon-900 mb-8">
+                  Loading Results...
+                </h1>
+                
+                <div className="flex flex-col items-center justify-center gap-4 my-12">
+                  <Loader2 className="h-12 w-12 text-maroon-600 animate-spin" />
+                  <p className="text-maroon-700">
+                    Please wait while we load your audit results
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    }>
+      <AuditResultsContent />
+    </Suspense>
+  );
+}
+
+function AuditResultsContent() {
   const searchParams = useSearchParams();
   const [auditResults, setAuditResults] = useState<AuditResult | null>(null);
   const [loading, setLoading] = useState(true);
@@ -785,7 +814,7 @@ export default function ThankYouPage() {
                 </h1>
                 
                 <p className="text-maroon-700 text-lg mb-6 max-w-xl mx-auto">
-                  We've analyzed your responses and identified several automation opportunities for your business.
+                  We&apos;ve analyzed your responses and identified several automation opportunities for your business.
                 </p>
                 
                 {/* Download/Email Report Buttons */}
@@ -873,9 +902,12 @@ export default function ThankYouPage() {
                             <p className="text-maroon-800 font-semibold">{opportunity}</p>
                             {opportunity.includes("Bottleneck") && (
                               <p className="text-maroon-600 text-sm mt-1 italic">
-                                {bottleneckSolutions[Object.keys(bottleneckSolutions).find(key => 
-                                  opportunity.includes(bottleneckSolutions[key].title)
-                                ) || ""]?.symptoms[0]}
+                                {(() => {
+                                  const key = Object.keys(bottleneckSolutions).find(k => 
+                                    opportunity.includes(bottleneckSolutions[k].title)
+                                  );
+                                  return key && bottleneckSolutions[key] ? bottleneckSolutions[key].symptoms[0] : "";
+                                })()}
                               </p>
                             )}
                           </div>
@@ -958,7 +990,7 @@ export default function ThankYouPage() {
               <p className="mt-2 text-green-600">Your results have been successfully recorded in our system.</p>
             )}
             {webhookStatus === "error" && (
-              <p className="mt-2 text-maroon-600">There was an issue saving your results, but don't worry - we've captured your email and will follow up shortly.</p>
+              <p className="mt-2 text-maroon-600">There was an issue saving your results, but don&apos;t worry - we&apos;ve captured your email and will follow up shortly.</p>
             )}
             
             {/* Debugging tool - only visible in development or when manually toggled */}

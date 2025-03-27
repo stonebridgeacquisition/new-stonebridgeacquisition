@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 const surveyQuestions = [
   {
     id: 1,
-    question: "What's your business name and industry?",
+    question: "What&apos;s your business name and industry?",
     type: "text-input",
     fields: [
       { name: "businessName", label: "Business Name", required: true },

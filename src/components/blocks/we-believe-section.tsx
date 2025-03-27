@@ -30,7 +30,7 @@ export function WeBelieveSection() {
               </p>
               <div className="text-2xl tracking-tighter md:text-5xl lg:text-7xl xl:text-8xl">
                 <div className="flex gap-1 md:gap-2 lg:gap-3 xl:gap-4">
-                  <h1 className="font-semibold">"AI should be</h1>
+                  <h1 className="font-semibold">&quot;AI should be</h1>
                   <p className="font-thin">accessible to</p>
                 </div>
                 <div className="flex gap-1 md:gap-2 lg:gap-3 xl:gap-4">
@@ -42,7 +42,7 @@ export function WeBelieveSection() {
                   <p className="font-thin">automation</p>
                   <h1 className="font-semibold">leads to faster</h1>
                 </div>
-                <h1 className="font-semibold">growth..."</h1>
+                <h1 className="font-semibold">growth...&quot;</h1>
               </div>
               <div className="mt-8 flex justify-center">
                 <GradientButton asChild className="text-lg">

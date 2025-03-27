@@ -29,7 +29,7 @@ export default function AboutPage() {
               About Us
             </h1>
             <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2 mt-4 mb-8">
-              <p className="font-thin text-maroon-800">We're a digital solutions agency built for the modern business world.</p>
+              <p className="font-medium text-maroon-800">Since 2022, we&apos;ve been helping businesses automate and optimize.</p>
             </div>
           </div>
         </div>
@@ -178,7 +178,9 @@ export default function AboutPage() {
             <div className="mt-12 text-center">
               <div className="w-full h-px bg-black/10 mb-12"></div>
               <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
-                <p className="font-thin text-maroon-800 italic">"We're not just tech people — we're partners in your success."</p>
+                <p className="text-maroon-800 leading-relaxed mb-4">
+                  &quot;Our company works with businesses across all industries to implement AI tools that save time, reduce costs, and increase revenue. We&apos;re not just consultants — we&apos;re builders and partners.&quot;
+                </p>
               </div>
               <div className="mt-8">
                 <GradientButton asChild className="text-lg">

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "netlify-build": "next build --no-lint",
     "start": "next start",
     "lint": "next lint"
   },

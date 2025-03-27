@@ -173,9 +173,9 @@ const TestimonialCarousel = React.forwardRef<
                   <h3 className="text-xl font-semibold text-maroon-900">
                     {testimonial.name}
                   </h3>
-                  <p className="text-center text-base text-maroon-800 italic">
-                    "{testimonial.description}"
-                  </p>
+                  <div className="text-center text-maroon-700 text-lg">
+                    &quot;{testimonial.description}&quot;
+                  </div>
                 </div>
               </motion.div>
             )

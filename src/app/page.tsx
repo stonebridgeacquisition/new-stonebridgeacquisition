@@ -40,13 +40,13 @@ const TESTIMONIAL_DATA = [
     id: 1,
     name: "Devouge Couture",
     avatar: "/images/DVC.jpg",
-    description: "The website and CRM they built for me was exactly what I needed. It's clean, easy to use, and already making my daily operations a lot easier."
+    description: "The website and CRM they built for me was exactly what I needed. It&apos;s clean, easy to use, and already making my daily operations a lot easier."
   },
   {
     id: 2,
     name: "New Homes Consultants",
     avatar: "/images/NHC.jpg",
-    description: "What stood out the most was how easy it was to work with them. Clear communication, quick turnaround, and a deep understanding of what my business needed. Couldn't ask for more."
+    description: "What stood out the most was how easy it was to work with them. Clear communication, quick turnaround, and a deep understanding of what my business needed. Couldn&apos;t ask for more."
   },
   {
     id: 3,
@@ -106,7 +106,7 @@ export default function Home() {
             <div className="w-full h-px bg-black/10 mb-12"></div>
             <div className="text-center">
               <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
-                <p className="font-thin text-maroon-800 italic">"You'll walk away with a clear, personalized action plan — no fluff, no jargon."</p>
+                <p className="font-thin text-maroon-800 italic">&quot;You&apos;ll walk away with a clear, personalized action plan — no fluff, no jargon.&quot;</p>
               </div>
             </div>
             
@@ -181,7 +181,7 @@ export default function Home() {
                   <p className="font-thin text-maroon-800 mb-1">
                     We help you <span className="font-semibold text-maroon-900">automate</span> and <span className="font-semibold text-maroon-900">optimize</span>
                   </p>
-                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">"using tailored AI solutions for your industry."</p>
+                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">&quot;using tailored AI solutions for your industry.&quot;</p>
                 </div>
                 
                 {/* Desktop version */}
@@ -192,7 +192,7 @@ export default function Home() {
                     <p className="font-thin text-maroon-800">and</p>
                     <p className="font-semibold text-maroon-900">optimize</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"using tailored AI solutions for your industry."</p>
+                  <p className="font-thin text-maroon-800 italic">&quot;using tailored AI solutions for your industry.&quot;</p>
                 </div>
                 
                 <div className="mt-6 md:mt-8">
@@ -218,7 +218,7 @@ export default function Home() {
               
               {/* Mobile-optimized subtitle */}
               <div className="md:hidden tracking-tighter text-center text-lg px-2">
-                <p className="font-thin text-maroon-800 mb-1">We'll build the <span className="font-semibold text-maroon-900">systems</span></p>
+                <p className="font-thin text-maroon-800 mb-1">We&apos;ll build the <span className="font-semibold text-maroon-900">systems</span></p>
                 <p>
                   <span className="font-thin text-maroon-800">so you can focus on </span>
                   <span className="font-semibold text-maroon-900">closing deals</span>
@@ -228,7 +228,7 @@ export default function Home() {
               {/* Desktop subtitle */}
               <div className="hidden md:flex md:text-2xl tracking-tighter flex-col items-center gap-2">
                 <div className="flex gap-2">
-                  <p className="font-thin text-maroon-800">We'll build the</p>
+                  <p className="font-thin text-maroon-800">We&apos;ll build the</p>
                   <p className="font-semibold text-maroon-900">systems</p>
                 </div>
                 <div className="flex gap-2">
@@ -263,7 +263,7 @@ export default function Home() {
                   <p className="font-thin text-maroon-800 mb-1">
                     <span className="font-semibold text-maroon-900">Done-For-You</span> or <span className="font-semibold text-maroon-900">Hybrid Support</span>
                   </p>
-                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">"– your choice."</p>
+                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">&quot;– your choice.&quot;</p>
                 </div>
                 
                 {/* Desktop version */}
@@ -273,7 +273,7 @@ export default function Home() {
                     <p className="font-thin text-maroon-800">or</p>
                     <p className="font-semibold text-maroon-900">Hybrid Support</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"– your choice."</p>
+                  <p className="font-thin text-maroon-800 italic">&quot;– your choice.&quot;</p>
                 </div>
                 
                 <div className="mt-6 md:mt-8">
@@ -298,7 +298,7 @@ export default function Home() {
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
                 <div className="flex gap-2">
-                  <p className="font-thin text-maroon-800">Here's What</p>
+                  <p className="font-thin text-maroon-800">Here&apos;s What</p>
                   <p className="font-semibold text-maroon-900">Our Clients</p>
                   <p className="font-thin text-maroon-800">Say:</p>
                 </div>
@@ -318,14 +318,14 @@ export default function Home() {
                 <p className="font-thin text-maroon-800">These are just a few success stories from</p>
                 <div className="flex gap-2">
                   <p className="font-semibold text-maroon-900">businesses</p>
-                  <p className="font-thin text-maroon-800">we've helped</p>
+                  <p className="font-thin text-maroon-800">we&apos;ve helped</p>
                 </div>
                 <div className="flex gap-2">
                   <p className="font-semibold text-maroon-900">automate</p>
                   <p className="font-thin text-maroon-800">and</p>
                   <p className="font-semibold text-maroon-900">grow.</p>
                 </div>
-                <p className="font-thin text-maroon-800 italic">"Your story could be next."</p>
+                <p className="font-thin text-maroon-800 italic">&quot;Your story could be next.&quot;</p>
               </div>
               <div className="mt-8">
                 <GradientButton asChild className="text-lg">
@@ -344,7 +344,7 @@ export default function Home() {
             {/* Centered Heading */}
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-maroon-900 mb-4">
-                Worried It Won't Work for You?
+                Worried It Won&apos;t Work for You?
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
                 <div className="flex gap-2">
@@ -366,7 +366,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-maroon-900 text-lg mb-2">30-Day Risk-Free Guarantee</h3>
-                      <p className="text-maroon-800">If you're not satisfied, you don't pay</p>
+                      <p className="text-maroon-800">If you&apos;re not satisfied, you don&apos;t pay</p>
                     </div>
                   </div>
                 </CardContent>
@@ -382,7 +382,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-maroon-900 text-lg mb-2">Results Guarantee</h3>
-                      <p className="text-maroon-800">We'll keep working with you until you see real results</p>
+                      <p className="text-maroon-800">We&apos;ll keep working with you until you see real results</p>
                     </div>
                   </div>
                 </CardContent>
@@ -403,7 +403,7 @@ export default function Home() {
                     <p className="font-semibold text-maroon-900">automation</p>
                     <p className="font-thin text-maroon-800">to gain.</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"Nothing to lose, everything to gain."</p>
+                  <p className="font-thin text-maroon-800 italic">&quot;Nothing to lose, everything to gain.&quot;</p>
                 </div>
                 <div className="mt-8">
                   <GradientButton asChild className="text-lg">
@@ -472,7 +472,7 @@ export default function Home() {
                     <p className="font-thin text-maroon-800">All included,</p>
                     <p className="font-semibold text-maroon-900">completely free,</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"when you partner with us."</p>
+                  <p className="font-thin text-maroon-800 italic">&quot;when you partner with us.&quot;</p>
                 </div>
                 <div className="mt-8">
                   <GradientButton asChild className="text-lg">
@@ -492,12 +492,12 @@ export default function Home() {
             {/* Centered Heading */}
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-maroon-900 mb-4">
-                Ready to Start? Don't Wait.
+                Ready to Start? Don&apos;t Wait.
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-4">
                 <div className="flex items-center gap-2 text-maroon-900">
                   <span className="text-2xl md:text-3xl">⚠️</span>
-                  <p className="font-semibold">We're only accepting 10 new clients this month</p>
+                  <p className="font-semibold">We&apos;re only accepting 10 new clients this month</p>
                 </div>
               </div>
             </div>
@@ -506,7 +506,7 @@ export default function Home() {
               <div className="w-full h-px bg-black/10 mb-12"></div>
               <div className="text-center">
                 <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
-                  <p className="font-thin text-maroon-800 italic">"Every day you wait, your competitors get ahead with AI. Don't miss your chance to automate and grow."</p>
+                  <p className="font-thin text-maroon-800 italic">&quot;Every day you wait, your competitors get ahead with AI. Don&apos;t miss your chance to automate and grow.&quot;</p>
                 </div>
                 <div className="mt-8">
                   <GradientButton asChild className="text-lg">
@@ -529,7 +529,7 @@ export default function Home() {
                 Want to Automate & Scale Your Business?
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
-                <p className="font-thin text-maroon-800">Let's build your AI systems and help you grow faster.</p>
+                <p className="font-thin text-maroon-800">Let&apos;s build your AI systems and help you grow faster.</p>
               </div>
             </div>
 
