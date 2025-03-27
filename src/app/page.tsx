@@ -8,6 +8,54 @@ import { Check } from "lucide-react";
 import { TestimonialCarousel } from "@/components/ui/testimonial";
 import { WeBelieveSection } from "@/components/blocks/we-believe-section";
 
+// Define the arrays used in the component
+const auditBenefits = [
+  "Identify your best automation opportunities",
+  "Analyze bottlenecks in your current processes",
+  "Suggest specific tools and solutions for your business",
+  "Provide an estimated ROI and timeline"
+];
+
+const painPoints = [
+  "Drowning in manual tasks (data entry, client follow-ups, scheduling, etc.)",
+  "Struggling with inefficiencies in lead management, CRM systems, and workflows",
+  "Missing out on AI integration that could streamline operations",
+  "Spending too much time on admin instead of revenue-generating activities",
+  "Dealing with inconsistent results due to manual processes"
+];
+
+const automationFeatures = [
+  "AI-powered lead generation and qualification systems",
+  "Automated follow-up sequences for prospects",
+  "Streamlined client onboarding and management",
+  "Intelligent document processing and data entry",
+  "Custom workflow automation for your specific business needs",
+  "AI integration with your existing tools and systems",
+  "Time-saving automations for admin and operations"
+];
+
+// Define testimonial data
+const TESTIMONIAL_DATA = [
+  {
+    id: 1,
+    name: "Devouge Couture",
+    avatar: "/images/DVC.jpg",
+    description: "The website and CRM they built for me was exactly what I needed. It's clean, easy to use, and already making my daily operations a lot easier."
+  },
+  {
+    id: 2,
+    name: "New Homes Consultants",
+    avatar: "/images/NHC.jpg",
+    description: "What stood out the most was how easy it was to work with them. Clear communication, quick turnaround, and a deep understanding of what my business needed. Couldn't ask for more."
+  },
+  {
+    id: 3,
+    name: "Archlid Ltd",
+    avatar: "/images/ARCH.jpg",
+    description: "I had no idea where to start with automating my business until I found them. They took the time to understand my workflow and came up with solutions that actually work and save me a lot of hours every week."
+  }
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -525,48 +573,6 @@ const auditFeatures = [
       </svg>
     ),
   },
-];
-
-const painPoints = [
-  "Drowning in manual tasks (data entry, client follow-ups, scheduling, etc.)",
-  "Struggling with inefficiencies in lead management, CRM systems, and workflows",
-  "Missing out on AI integration that could streamline operations and boost profitability",
-];
-
-const auditBenefits = [
-  "Identify your biggest time-wasting tasks",
-  "Find the fastest wins for automation",
-  "Show you how to integrate AI without disrupting your workflow",
-];
-
-const automationFeatures = [
-  "Custom AI automations (leads, onboarding, workflows)",
-  "AI chatbots to qualify and nurture leads 24/7",
-  "CRM and system integrations",
-  "Automated follow-ups (emails, texts, reminders)",
-  "Landing pages and funnels to convert more leads",
-  "Dashboards to track your numbers in real-time",
-];
-
-const TESTIMONIAL_DATA = [
-  {
-    id: 1,
-    name: "Devouge Couture",
-    avatar: "/images/DVC.jpg",
-    description: "The website and CRM they built for me was exactly what I needed. It's clean, easy to use, and already making my daily operations a lot easier."
-  },
-  {
-    id: 2,
-    name: "New Homes Consultants",
-    avatar: "/images/NHC.jpg",
-    description: "What stood out the most was how easy it was to work with them. Clear communication, quick turnaround, and a deep understanding of what my business needed. Couldn't ask for more."
-  },
-  {
-    id: 3,
-    name: "Archlid Ltd",
-    avatar: "/images/ARCH.jpg",
-    description: "I had no idea where to start with automating my business until I found them. They took the time to understand my workflow and came up with solutions that actually work and save me a lot of hours every week."
-  }
 ];
 
 const bonusFeatures = [
