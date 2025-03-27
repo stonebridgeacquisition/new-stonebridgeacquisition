@@ -312,7 +312,6 @@ export function Waves({
     }
 
     function onTouchMove(e: TouchEvent) {
-      e.preventDefault()
       const touch = e.touches[0]
       updateMouse(touch.clientX, touch.clientY)
     }
@@ -336,7 +335,7 @@ export function Waves({
     requestAnimationFrame(tick)
     window.addEventListener("resize", onResize)
     window.addEventListener("mousemove", onMouseMove)
-    window.addEventListener("touchmove", onTouchMove, { passive: false })
+    window.addEventListener("touchmove", onTouchMove, { passive: true })
 
     return () => {
       window.removeEventListener("resize", onResize)
@@ -362,6 +361,7 @@ export function Waves({
       ref={containerRef}
       style={{
         backgroundColor,
+        pointerEvents: "none",
       }}
       className={cn(
         "absolute top-0 left-0 w-full h-full overflow-hidden",
