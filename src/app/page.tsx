@@ -346,7 +346,15 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-maroon-900 mb-4">
                 Worried It Won&apos;t Work for You?
               </h2>
-              <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
+              
+              {/* Mobile-optimized subtitle */}
+              <div className="md:hidden tracking-tighter text-center text-lg px-2">
+                <p className="font-thin text-maroon-800 mb-1">We remove all the <span className="font-semibold text-maroon-900">risk</span></p>
+                <p className="font-thin text-maroon-800">with our guarantee:</p>
+              </div>
+              
+              {/* Desktop subtitle */}
+              <div className="hidden md:flex md:text-2xl tracking-tighter flex-col items-center gap-2">
                 <div className="flex gap-2">
                   <p className="font-thin text-maroon-800">We remove all the</p>
                   <p className="font-semibold text-maroon-900">risk</p>
@@ -392,7 +400,15 @@ export default function Home() {
             <div className="mt-12">
               <div className="w-full h-px bg-black/10 mb-12"></div>
               <div className="text-center">
-                <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
+                {/* Mobile version */}
+                <div className="md:hidden tracking-tighter text-center text-lg">
+                  <p className="font-thin text-maroon-800">You have <span className="font-semibold text-maroon-900">nothing to lose</span> —</p>
+                  <p className="font-thin text-maroon-800 mt-1">and <span className="font-semibold text-maroon-900">automation</span> to gain.</p>
+                  <p className="font-thin text-maroon-800 italic mt-2">&quot;Nothing to lose, everything to gain.&quot;</p>
+                </div>
+                
+                {/* Desktop version */}
+                <div className="hidden md:flex text-xl md:text-2xl lg:text-3xl tracking-tighter flex-col items-center gap-2">
                   <div className="flex gap-2">
                     <p className="font-thin text-maroon-800">You have</p>
                     <p className="font-semibold text-maroon-900">nothing to lose</p>
@@ -425,7 +441,16 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-maroon-900 mb-4">
                 Want Even More Value?
               </h2>
-              <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
+              
+              {/* Mobile-optimized subtitle */}
+              <div className="md:hidden tracking-tighter text-center text-lg px-2">
+                <p className="font-thin text-maroon-800 mb-1">Get these <span className="font-semibold text-maroon-900">exclusive bonuses</span></p>
+                <p className="font-thin text-maroon-800">at <span className="font-semibold text-maroon-900">no extra cost</span></p>
+                <p className="font-thin text-maroon-800">when you work with us:</p>
+              </div>
+              
+              {/* Desktop subtitle */}
+              <div className="hidden md:flex text-xl md:text-2xl tracking-tighter flex-col items-center gap-2">
                 <div className="flex gap-2">
                   <p className="font-thin text-maroon-800">Get these</p>
                   <p className="font-semibold text-maroon-900">exclusive bonuses</p>
@@ -467,7 +492,14 @@ export default function Home() {
             <div className="mt-12">
               <div className="w-full h-px bg-black/10 mb-12"></div>
               <div className="text-center">
-                <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
+                {/* Mobile version */}
+                <div className="md:hidden tracking-tighter text-center text-lg">
+                  <p className="font-thin text-maroon-800">All included, <span className="font-semibold text-maroon-900">completely free,</span></p>
+                  <p className="font-thin text-maroon-800 italic mt-2">&quot;when you partner with us.&quot;</p>
+                </div>
+                
+                {/* Desktop version */}
+                <div className="hidden md:flex text-xl md:text-2xl lg:text-3xl tracking-tighter flex-col items-center gap-2">
                   <div className="flex gap-2">
                     <p className="font-thin text-maroon-800">All included,</p>
                     <p className="font-semibold text-maroon-900">completely free,</p>

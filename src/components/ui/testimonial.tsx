@@ -77,14 +77,14 @@ const TestimonialCarousel = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "h-96 w-full flex items-center justify-center",
+          "h-[32rem] w-full flex items-center justify-center",
           className
         )}
         {...props}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="relative w-full max-w-xl h-80">
+        <div className="relative w-full max-w-xl h-[26rem]">
           {testimonials.map((testimonial, index) => {
             const isCurrentCard = index === currentIndex
             const isPrevCard =
@@ -98,7 +98,7 @@ const TestimonialCarousel = React.forwardRef<
               <motion.div
                 key={testimonial.id}
                 className={cn(
-                  "absolute w-full h-full rounded-2xl cursor-grab active:cursor-grabbing",
+                  "absolute w-full h-full rounded-2xl cursor-grab active:cursor-grabbing overflow-y-auto",
                   "bg-white/80 backdrop-blur-[2px] shadow-xl border border-maroon-200",
                 )}
                 style={{
@@ -173,7 +173,7 @@ const TestimonialCarousel = React.forwardRef<
                   <h3 className="text-xl font-semibold text-maroon-900">
                     {testimonial.name}
                   </h3>
-                  <div className="text-center text-maroon-700 text-lg">
+                  <div className="text-center text-maroon-700 text-base md:text-lg max-w-[90%] mx-auto">
                     &quot;{testimonial.description}&quot;
                   </div>
                 </div>
