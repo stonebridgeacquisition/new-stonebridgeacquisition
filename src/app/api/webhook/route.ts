@@ -8,10 +8,21 @@ export async function POST(request: Request) {
     // Log the data we're trying to send (be careful with sensitive info in production)
     console.log('Webhook proxy received data:', JSON.stringify(data));
     
-    // The Make.com webhook URL
-    const webhookUrl: string = 'https://hook.eu2.make.com/110ry9rcde1i4wask86l6rfl2byiskn4';
+    // Determine which webhook URL to use based on the data
+    let webhookUrl: string;
     
-    console.log('Forwarding request to Make.com webhook');
+    // Check if this is coming from the audit survey (has audit_score field)
+    if (data.audit_score !== undefined || data.survey_data !== undefined) {
+      // This is audit survey data - send to the audit webhook
+      webhookUrl = 'https://hook.eu2.make.com/r7pft94pmuvul4b7t567fwz3ylfq8fn4';
+      console.log('Identified as audit data, using audit webhook URL');
+    } else {
+      // This is contact form or welcome popup data - send to the contact webhook
+      webhookUrl = 'https://hook.eu2.make.com/110ry9rcde1i4wask86l6rfl2byiskn4';
+      console.log('Identified as contact form or welcome popup data, using contact webhook URL');
+    }
+    
+    console.log(`Forwarding request to Make.com webhook: ${webhookUrl}`);
     
     // Forward the request to Make.com
     const response = await fetch(webhookUrl, {
@@ -37,17 +48,16 @@ export async function POST(request: Request) {
     }
     
     // Try to get the response body for debugging
-    let responseBody: string;
+    let responseBody: string = '';
     try {
       responseBody = await response.text();
       console.log('Response from Make.com:', responseBody);
     } catch (err) {
       console.log('Could not read response body');
-      responseBody = '';
     }
     
     // Return success response
-    return NextResponse.json({ success: true, response: responseBody || 'OK' });
+    return NextResponse.json({ success: true, response: responseBody || 'OK', webhookUsed: webhookUrl });
   } catch (error) {
     console.error('Error in webhook proxy:', error);
     return NextResponse.json(

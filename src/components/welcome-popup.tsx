@@ -55,10 +55,12 @@ export function WelcomePopup() {
       // Prepare the data for webhook
       const webhookData = {
         source: "welcome_popup",
-        formType: "newsletter_signup",
+        formType: "contact_inquiry",
         data: {
           name: data.name,
           email: data.email,
+          company: "",
+          message: "Welcome popup sign-up",
           timestamp: new Date().toISOString(),
         }
       };
