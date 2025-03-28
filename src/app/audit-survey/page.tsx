@@ -178,23 +178,35 @@ export default function AuditSurvey() {
 
   // Handle single select
   const handleSingleSelect = (option: string) => {
+    // Save to answers 
     setAnswers({
       ...answers,
       [currentQuestion.id]: option,
     });
-    if (currentQuestionIndex < surveyQuestions.length - 1) {
-      // Move to next question after selection
+
+    // If "Other" was selected, focus on the other input
+    if (option.includes("Other")) {
       setTimeout(() => {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setOtherResponse(""); // Reset other response for next question
-      }, 300);
+        const input = document.querySelector('input[placeholder="Please specify"]') as HTMLInputElement;
+        input?.focus();
+      }, 100);
+      return;
+    }
+
+    // For other options (not "Other"), auto-advance to next question
+    if (currentQuestionIndex < surveyQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setOtherResponse("");
+    } else {
+      // Submit the survey if this is the last question
+      handleSubmitSurvey();
     }
   };
 
   // Handle multi select
   const handleMultiSelect = (option: string) => {
     const currentAnswers = answers[currentQuestion.id] || [];
-    let newAnswers;
+    let newAnswers: string[];
     
     if (currentAnswers.includes(option)) {
       // Remove if already selected
@@ -208,6 +220,14 @@ export default function AuditSurvey() {
       ...answers,
       [currentQuestion.id]: newAnswers,
     });
+
+    // If "Other" was selected, focus on the other input
+    if (option.includes("Other") && !currentAnswers.includes(option)) {
+      setTimeout(() => {
+        const input = document.querySelector('input[placeholder="Please specify"]') as HTMLInputElement;
+        input?.focus();
+      }, 100);
+    }
   };
 
   // Handle text input changes
@@ -235,12 +255,16 @@ export default function AuditSurvey() {
       const textInputAnswers: Record<string, string> = {};
       
       currentQuestion.fields.forEach(field => {
-        if (field.required && !textInputs[field.name]) {
+        const trimmedValue = (textInputs[field.name] || "").trim();
+        
+        if (field.required && !trimmedValue) {
           alert(`Please fill in ${field.label}`);
           isValid = false;
           return;
         }
-        textInputAnswers[field.name] = textInputs[field.name] || "";
+        
+        // Prevent "None" placeholder values
+        textInputAnswers[field.name] = trimmedValue === "None" ? "" : trimmedValue;
       });
       
       if (!isValid) return;
@@ -257,15 +281,32 @@ export default function AuditSurvey() {
 
     // For contact info, validate required fields
     if (currentQuestion.type === "contact-info") {
-      if (!contactInfo.name || !contactInfo.email) {
+      // Trim inputs to prevent whitespace-only values
+      const trimmedName = contactInfo.name?.trim() || "";
+      const trimmedEmail = contactInfo.email?.trim() || "";
+      const trimmedPhone = contactInfo.phone?.trim() || "";
+      
+      // Check if required fields are filled
+      if (!trimmedName || !trimmedEmail) {
         alert("Please fill in your name and email");
         return;
       }
+      
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(trimmedEmail)) {
+        alert("Please enter a valid email address");
+        return;
+      }
 
-      // Save contact info to answers
+      // Save trimmed contact info to answers
       setAnswers({
         ...answers,
-        [currentQuestion.id]: contactInfo,
+        [currentQuestion.id]: {
+          name: trimmedName === "None" ? "" : trimmedName,
+          email: trimmedEmail === "None" ? "" : trimmedEmail,
+          phone: trimmedPhone === "None" ? "" : trimmedPhone
+        },
       });
     }
 
