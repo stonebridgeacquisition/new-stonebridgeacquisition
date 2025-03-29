@@ -50,9 +50,10 @@ const sendToWebhook = async (surveyData: any, auditResults: AuditResult) => {
       // User contact information
       name: cleanedContactInfo.name,
       email: cleanedContactInfo.email,
+      phone: cleanedContactInfo.phone,  // Added phone to the payload
       business_name: surveyData.businessName || "",
       
-      // The 3 key data points requested
+      // The key data points requested
       automation_opportunities: auditResults.automationOpportunities || [],
       recommended_tools: auditResults.recommendedTools || [],
       top_priorities: auditResults.topPriorities || [],
@@ -563,6 +564,68 @@ function AuditResultsContent() {
   const [showDebugInfo, setShowDebugInfo] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [sendingEmail, setSendingEmail] = useState(false);
+  const [isEditingContact, setIsEditingContact] = useState(false);
+  const [editedContactInfo, setEditedContactInfo] = useState<{name: string, email: string, phone: string}>({
+    name: '',
+    email: '',
+    phone: '',
+  });
+  const [submitContactLoading, setSubmitContactLoading] = useState(false);
+  
+  // Function to handle contact edit
+  const handleEditContactClick = () => {
+    setIsEditingContact(true);
+    setEditedContactInfo({
+      name: surveyData?.contactInfo?.name || '',
+      email: surveyData?.contactInfo?.email || '',
+      phone: surveyData?.contactInfo?.phone || ''
+    });
+  };
+  
+  // Function to cancel contact edit
+  const handleCancelEdit = () => {
+    setIsEditingContact(false);
+  };
+  
+  // Function to update contact fields as user types
+  const handleContactChange = (field: 'name' | 'email' | 'phone', value: string) => {
+    setEditedContactInfo(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+  
+  // Function to save contact info changes
+  const handleSaveContactInfo = async () => {
+    setSubmitContactLoading(true);
+    
+    try {
+      // Update the surveyData with the new contact info
+      const updatedSurveyData = {
+        ...surveyData,
+        contactInfo: {
+          ...editedContactInfo
+        }
+      };
+      
+      // Update state
+      setSurveyData(updatedSurveyData);
+      
+      // Resend to webhook with updated info
+      if (auditResults) {
+        await handleWebhookSubmission(updatedSurveyData, auditResults);
+      }
+      
+      // Exit edit mode
+      setIsEditingContact(false);
+      
+      console.log("Updated contact information:", editedContactInfo);
+    } catch (error) {
+      console.error("Error updating contact info:", error);
+    } finally {
+      setSubmitContactLoading(false);
+    }
+  };
   
   // Function to handle webhook submission directly in the component
   const handleWebhookSubmission = async (data: any, results: AuditResult) => {
@@ -860,6 +923,107 @@ function AuditResultsContent() {
   
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-maroon-50">
+      {/* Contact information in top right corner */}
+      <div className="fixed top-4 right-4 z-50">
+        <div className="bg-white rounded-lg shadow-md p-3 border border-maroon-200">
+          {isEditingContact ? (
+            <div className="p-3 space-y-3 w-72">
+              <h3 className="font-medium text-maroon-800 text-sm">Edit Contact Information:</h3>
+              <div>
+                <label htmlFor="edit-name" className="block text-xs font-medium text-maroon-700 mb-1">
+                  Name:
+                </label>
+                <input
+                  id="edit-name"
+                  type="text"
+                  value={editedContactInfo.name}
+                  onChange={(e) => handleContactChange('name', e.target.value)}
+                  className="w-full rounded-md border-maroon-200 text-sm p-1.5"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label htmlFor="edit-email" className="block text-xs font-medium text-maroon-700 mb-1">
+                  Email: <span className="text-maroon-500">*</span>
+                </label>
+                <input
+                  id="edit-email"
+                  type="email"
+                  value={editedContactInfo.email}
+                  onChange={(e) => handleContactChange('email', e.target.value)}
+                  className="w-full rounded-md border-maroon-200 text-sm p-1.5"
+                  placeholder="your.email@example.com"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="edit-phone" className="block text-xs font-medium text-maroon-700 mb-1">
+                  Phone:
+                </label>
+                <input
+                  id="edit-phone"
+                  type="tel"
+                  value={editedContactInfo.phone}
+                  onChange={(e) => handleContactChange('phone', e.target.value)}
+                  className="w-full rounded-md border-maroon-200 text-sm p-1.5"
+                  placeholder="(123) 456-7890"
+                />
+              </div>
+              <div className="pt-1 flex justify-end gap-2">
+                <Button 
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCancelEdit}
+                  className="text-xs px-2 py-1 h-auto"
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  size="sm"
+                  onClick={handleSaveContactInfo}
+                  disabled={submitContactLoading || !editedContactInfo.email}
+                  className="text-xs bg-maroon-600 hover:bg-maroon-700 text-white px-2 py-1 h-auto"
+                >
+                  {submitContactLoading ? (
+                    <><Loader2 className="h-3 w-3 animate-spin mr-1" /> Saving...</>
+                  ) : 'Save'}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col space-y-1 w-60">
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="font-semibold text-maroon-800 text-xs">Contact Information:</h3>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={handleEditContactClick}
+                  className="text-xs h-6 px-2 py-0"
+                >
+                  Edit
+                </Button>
+              </div>
+              <div className="text-sm">
+                <p className="text-xs text-maroon-600">Name:</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.name || "Not provided"}</p>
+              </div>
+              <div className="text-sm">
+                <p className="text-xs text-maroon-600">Email:</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.email || "Not provided"}</p>
+              </div>
+              <div className="text-sm">
+                <p className="text-xs text-maroon-600">Phone:</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.phone || "Not provided"}</p>
+              </div>
+              <div className="text-sm">
+                <p className="text-xs text-maroon-600">Business:</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.businessName || "Not provided"}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className="py-10 md:py-16">
         <div className="container mx-auto px-4">
           <Card className="max-w-4xl mx-auto shadow-lg border-maroon-200 mb-8">

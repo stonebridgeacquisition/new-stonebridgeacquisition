@@ -12,37 +12,61 @@ export async function POST(request: Request) {
     const webhookUrl = 'https://hook.eu2.make.com/r7pft94pmuvul4b7t567fwz3ylfq8fn4';
     console.log(`Forwarding request to Make.com webhook: ${webhookUrl}`);
     
-    // Clean potential "None" values from contact information
-    const cleanName = data.name === "None" ? "" : (data.name || "");
-    const cleanEmail = data.email === "None" ? "" : (data.email || "");
-    const cleanBusinessName = data.business_name === "None" ? "" : (data.business_name || "");
+    // Extract contact information fields and clean them
+    // This handles both direct fields and nested contactInfo structure
+    // Priority: Get from direct fields (from top-right corner edit) then from contactInfo
+    const name = data.name || (data.contactInfo?.name) || '';
+    const email = data.email || (data.contactInfo?.email) || '';
+    const phone = data.contactInfo?.phone || '';
+    const business_name = data.business_name || data.businessName || '';
+    
+    // More aggressive cleaning of contact information fields
+    const cleanName = name ? (name === "None" ? "" : name.trim()) : "";
+    const cleanEmail = email ? (email === "None" ? "" : email.trim()) : "";
+    const cleanPhone = phone ? (phone === "None" ? "" : phone.trim()) : "";
+    const cleanBusinessName = business_name ? (business_name === "None" ? "" : business_name.trim()) : "";
+    
+    // Log the extracted contact information
+    console.log('Contact information extracted:', {
+      name: cleanName,
+      email: cleanEmail,
+      phone: cleanPhone,
+      business_name: cleanBusinessName
+    });
     
     // Create a simplified payload - only send what's absolutely needed
     // Make.com sometimes rejects complex nested structures
     const simplePayload = {
-      // User contact information (required)
+      // User contact information - prioritize these fields
       name: cleanName,
       email: cleanEmail,
+      phone: cleanPhone,
       business_name: cleanBusinessName,
       
       // Main data points needed
       automation_opportunities: Array.isArray(data.automation_opportunities) 
         ? data.automation_opportunities 
-        : (typeof data.automation_opportunities_text === 'string' 
-            ? data.automation_opportunities_text 
-            : ""),
+        : (Array.isArray(data.auditResults?.automationOpportunities)
+            ? data.auditResults.automationOpportunities
+            : (typeof data.automation_opportunities_text === 'string' 
+                ? data.automation_opportunities_text 
+                : "")),
       
       recommended_tools: Array.isArray(data.recommended_tools) 
         ? data.recommended_tools 
-        : (typeof data.recommended_tools_text === 'string' 
-            ? data.recommended_tools_text 
-            : ""),
+        : (Array.isArray(data.auditResults?.recommendedTools)
+            ? data.auditResults.recommendedTools
+            : (typeof data.recommended_tools_text === 'string' 
+                ? data.recommended_tools_text 
+                : "")),
       
       top_priorities: Array.isArray(data.top_priorities) 
         ? data.top_priorities 
-        : (typeof data.top_priorities_text === 'string' 
-            ? data.top_priorities_text 
-            : "")
+        : (Array.isArray(data.auditResults?.topPriorities)
+            ? data.auditResults.topPriorities
+            : (typeof data.top_priorities_text === 'string' 
+                ? data.top_priorities_text 
+                : ""))
     };
     
     // Log the cleaned payload
