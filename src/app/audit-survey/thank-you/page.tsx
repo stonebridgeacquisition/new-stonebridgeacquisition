@@ -33,38 +33,73 @@ const sendToWebhook = async (surveyData: any, auditResults: AuditResult) => {
     // Extract user contact information
     const contactInfo = surveyData.contactInfo || {};
     
-    // Prepare data payload
+    // Format the audit data into a more readable format for text fields
+    const formattedOpportunities = auditResults.automationOpportunities.map((opp, i) => 
+      `${i+1}. ${opp}`
+    ).join('\n');
+    
+    const formattedTools = auditResults.recommendedTools.map((tool, i) => 
+      `${i+1}. ${tool}`
+    ).join('\n');
+    
+    const formattedPriorities = auditResults.topPriorities.map((priority, i) => 
+      `${i+1}. ${priority}`
+    ).join('\n');
+    
+    // Create a simplifies payload with flat structure
     const payload = {
-      // User contact information
+      // User contact information (required fields for Make.com)
       name: contactInfo.name || "",
       email: contactInfo.email || "",
       business_name: surveyData.businessName || "",
       phone: contactInfo.phone || "",
       
-      // Audit results
+      // Key metrics 
       audit_score: auditResults.overallScore,
-      automation_opportunities: auditResults.automationOpportunities,
-      recommended_tools: auditResults.recommendedTools,
       time_estimate: auditResults.timeEstimate,
       cost_savings_estimate: auditResults.costSavingsEstimate,
+      
+      // Main sections as text (improved compatibility)
+      automation_opportunities_text: formattedOpportunities,
+      recommended_tools_text: formattedTools,
+      top_priorities_text: formattedPriorities,
+      
+      // Also send as arrays for more complex scenarios
+      automation_opportunities: auditResults.automationOpportunities,
+      recommended_tools: auditResults.recommendedTools,
       top_priorities: auditResults.topPriorities,
       
-      // Additional survey data that might be useful
-      survey_data: {
-        bottlenecks: surveyData.bottlenecks || [],
-        using_ai: surveyData.usingAI || "",
-        current_tools: surveyData.currentTools || "",
-        revenue: surveyData.revenue || "",
-        revenue_goal: surveyData.revenueGoal || "",
-        client_acquisition: surveyData.clientAcquisition || [],
-        manual_hours: surveyData.manualHours || "",
-        team_size: surveyData.teamSize || "",
-        timeline: surveyData.timeline || "",
-        budget: surveyData.budget || ""
-      }
+      // Comprehensive text summary for easy reading in Make.com
+      summary: `
+Business: ${surveyData.businessName || "Not specified"}
+Contact: ${contactInfo.name || ""} (${contactInfo.email || ""})
+Phone: ${contactInfo.phone || "Not provided"}
+        
+AUTOMATION READINESS SCORE: ${auditResults.overallScore}%
+ESTIMATED TIME SAVINGS: ${auditResults.timeEstimate}
+POTENTIAL COST SAVINGS: ${auditResults.costSavingsEstimate}
+
+TOP AUTOMATION OPPORTUNITIES:
+${formattedOpportunities}
+
+RECOMMENDED TOOLS & TECHNOLOGIES:
+${formattedTools}
+
+NEXT STEPS & PRIORITIES:
+${formattedPriorities}
+      `,
+      
+      // Add key survey data fields directly to the root
+      bottlenecks: surveyData.bottlenecks || [],
+      using_ai: surveyData.usingAI || "",
+      current_tools: surveyData.currentTools || "",
+      revenue: surveyData.revenue || "",
+      team_size: surveyData.teamSize || "",
+      timeline: surveyData.timeline || "",
+      budget: surveyData.budget || ""
     };
     
-    console.log("Sending payload to webhook via proxy");
+    console.log("Sending simplified payload to webhook via proxy");
     
     // Send data to our proxy endpoint
     const response = await fetch(proxyUrl, {
@@ -73,13 +108,12 @@ const sendToWebhook = async (surveyData: any, auditResults: AuditResult) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
-      // No need for CORS mode since we're making a same-origin request
     });
     
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.text();
       console.error("Webhook error response:", errorData);
-      throw new Error(`Failed to send data to webhook: ${response.status}`);
+      throw new Error(`Failed to send data to webhook: ${response.status} - ${errorData}`);
     }
     
     console.log("Successfully sent results to webhook");
@@ -576,11 +610,46 @@ function AuditResultsContent() {
     try {
       setWebhookStatus("idle");
       setWebhookError(null);
-      await sendToWebhook(data, results);
-      setWebhookStatus("success");
-      console.log("Webhook submission successful");
+      
+      // Log critical data to ensure it's being sent
+      console.log("Preparing to send audit data to webhook:", {
+        contact: data.contactInfo ? `${data.contactInfo.name} (${data.contactInfo.email})` : "No contact info",
+        business: data.businessName || "Not specified",
+        opportunities: results.automationOpportunities?.length || 0,
+        tools: results.recommendedTools?.length || 0,
+        priorities: results.topPriorities?.length || 0
+      });
+      
+      // Ensure contact info exists before sending
+      if (!data.contactInfo?.email) {
+        console.warn("⚠️ No contact email found - this may cause webhook issues");
+      }
+      
+      try {
+        await sendToWebhook(data, results);
+        setWebhookStatus("success");
+        console.log("✅ Webhook submission successful");
+      } catch (error) {
+        // Handle webhook error
+        setWebhookStatus("error");
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        setWebhookError(errorMessage);
+        console.error("❌ Error submitting to webhook:", errorMessage);
+        
+        // Try to diagnose the issue
+        if (errorMessage.includes("400")) {
+          console.error("This appears to be a data format issue - webhook rejecting the payload");
+        } else if (errorMessage.includes("404")) {
+          console.error("Webhook URL may be incorrect or no longer valid");
+        } else if (errorMessage.includes("500")) {
+          console.error("Make.com server error - you may want to check their status page");
+        }
+        
+        // Add visual indicator that something went wrong
+        alert(`There was an issue sending your results to our system.\nYour results are still displayed here, but the data wasn't saved for our team.\n\nError: ${errorMessage}`);
+      }
     } catch (error) {
-      console.error("Error submitting to webhook:", error);
+      console.error("Unexpected error in webhook submission:", error);
       setWebhookStatus("error");
       setWebhookError(error instanceof Error ? error.message : String(error));
       
@@ -703,8 +772,9 @@ function AuditResultsContent() {
         
         if (encodedData) {
           const decodedData = JSON.parse(decodeURIComponent(encodedData));
+          console.log("Raw survey data:", decodedData);
           
-          // Prepare data for AI analysis
+          // Prepare data for AI analysis, ensuring proper structure
           const userData = {
             businessName: decodedData[1]?.businessName || "your business",
             bottlenecks: decodedData[2] || [],
@@ -719,6 +789,33 @@ function AuditResultsContent() {
             budget: decodedData[11] || "",
             contactInfo: decodedData[12] || {},
           };
+          
+          // Ensure contact info is properly structured and validated
+          const contactInfo = userData.contactInfo || {};
+          if (typeof contactInfo === 'object') {
+            userData.contactInfo = {
+              name: (contactInfo.name || "").trim(),
+              email: (contactInfo.email || "").trim(),
+              phone: (contactInfo.phone || "").trim(),
+            };
+            
+            // Extra validation - make sure there are no 'None' values
+            if (userData.contactInfo.name === 'None') userData.contactInfo.name = '';
+            if (userData.contactInfo.email === 'None') userData.contactInfo.email = '';
+            if (userData.contactInfo.phone === 'None') userData.contactInfo.phone = '';
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (userData.contactInfo.email && !emailRegex.test(userData.contactInfo.email)) {
+              console.warn("⚠️ Invalid email format detected:", userData.contactInfo.email);
+            }
+            
+            // Log contact info to verify it's correctly formatted
+            console.log("Contact info extracted:", userData.contactInfo);
+          } else {
+            console.warn("Contact info is not properly formatted:", contactInfo);
+            userData.contactInfo = { name: "", email: "", phone: "" };
+          }
           
           // Store the survey data for webhook use
           setSurveyData(userData);
