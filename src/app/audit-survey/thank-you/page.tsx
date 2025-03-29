@@ -30,15 +30,26 @@ const sendToWebhook = async (surveyData: any, auditResults: AuditResult) => {
     // Use our API route instead of calling Make.com directly
     const proxyUrl = "/api/webhook";
     
-    // Extract user contact information
-    const contactInfo = surveyData.contactInfo || {};
+    // Extract user contact information with proper validation
+    let contactInfo = surveyData.contactInfo || {};
+    
+    // Clean up contact info - explicitly replace "None" values with empty strings
+    const cleanedContactInfo = {
+      name: (contactInfo.name === "None" || !contactInfo.name) ? "" : contactInfo.name.trim(),
+      email: (contactInfo.email === "None" || !contactInfo.email) ? "" : contactInfo.email.trim(),
+      phone: (contactInfo.phone === "None" || !contactInfo.phone) ? "" : contactInfo.phone.trim(),
+    };
+    
+    // Log the cleaned contact info for debugging
+    console.log("Original contact info:", contactInfo);
+    console.log("Cleaned contact info:", cleanedContactInfo);
     
     // Create the absolute minimum payload needed for the webhook
     // Keep it flat and simple - complex structures can cause 400 errors
     const payload = {
       // User contact information
-      name: contactInfo.name || "",
-      email: contactInfo.email || "",
+      name: cleanedContactInfo.name,
+      email: cleanedContactInfo.email,
       business_name: surveyData.businessName || "",
       
       // The 3 key data points requested
@@ -722,6 +733,30 @@ function AuditResultsContent() {
           const decodedData = JSON.parse(decodeURIComponent(encodedData));
           console.log("Raw survey data:", decodedData);
           
+          // Get contact info from question 12 (contact form)
+          const rawContactInfo = decodedData[12] || {};
+          console.log("Raw contact info from survey:", rawContactInfo);
+          
+          // Explicitly handle and clean contact info
+          const cleanedContactInfo = {
+            name: typeof rawContactInfo.name === 'string' ? 
+              (rawContactInfo.name === 'None' ? '' : rawContactInfo.name.trim()) : '',
+            email: typeof rawContactInfo.email === 'string' ? 
+              (rawContactInfo.email === 'None' ? '' : rawContactInfo.email.trim()) : '',
+            phone: typeof rawContactInfo.phone === 'string' ? 
+              (rawContactInfo.phone === 'None' ? '' : rawContactInfo.phone.trim()) : ''
+          };
+          
+          console.log("Cleaned contact info:", cleanedContactInfo);
+          
+          // Validate email format if present
+          if (cleanedContactInfo.email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(cleanedContactInfo.email)) {
+              console.warn("⚠️ Invalid email format detected:", cleanedContactInfo.email);
+            }
+          }
+          
           // Prepare data for AI analysis, ensuring proper structure
           const userData = {
             businessName: decodedData[1]?.businessName || "your business",
@@ -735,35 +770,8 @@ function AuditResultsContent() {
             teamSize: decodedData[9] || "",
             timeline: decodedData[10] || "",
             budget: decodedData[11] || "",
-            contactInfo: decodedData[12] || {},
+            contactInfo: cleanedContactInfo,
           };
-          
-          // Ensure contact info is properly structured and validated
-          const contactInfo = userData.contactInfo || {};
-          if (typeof contactInfo === 'object') {
-            userData.contactInfo = {
-              name: (contactInfo.name || "").trim(),
-              email: (contactInfo.email || "").trim(),
-              phone: (contactInfo.phone || "").trim(),
-            };
-            
-            // Extra validation - make sure there are no 'None' values
-            if (userData.contactInfo.name === 'None') userData.contactInfo.name = '';
-            if (userData.contactInfo.email === 'None') userData.contactInfo.email = '';
-            if (userData.contactInfo.phone === 'None') userData.contactInfo.phone = '';
-            
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (userData.contactInfo.email && !emailRegex.test(userData.contactInfo.email)) {
-              console.warn("⚠️ Invalid email format detected:", userData.contactInfo.email);
-            }
-            
-            // Log contact info to verify it's correctly formatted
-            console.log("Contact info extracted:", userData.contactInfo);
-          } else {
-            console.warn("Contact info is not properly formatted:", contactInfo);
-            userData.contactInfo = { name: "", email: "", phone: "" };
-          }
           
           // Store the survey data for webhook use
           setSurveyData(userData);
@@ -772,15 +780,19 @@ function AuditResultsContent() {
           const results = await generateAIAudit(userData);
           setAuditResults(results);
           
-          // Send results to webhook
+          // Send results to webhook with properly cleaned contact info
           handleWebhookSubmission(userData, results);
         } else {
           // Fallback if no data is available
+          console.warn("No survey data found - using fallback values");
           const results = await generateAIAudit({});
           setAuditResults(results);
           
           // Send fallback results to webhook
-          handleWebhookSubmission({}, results);
+          handleWebhookSubmission({
+            contactInfo: { name: "", email: "", phone: "" },
+            businessName: ""
+          }, results);
         }
       } catch (error) {
         console.error("Error analyzing survey data:", error);
@@ -808,8 +820,11 @@ function AuditResultsContent() {
         };
         setAuditResults(fallbackResults);
         
-        // Send fallback results to webhook
-        handleWebhookSubmission({}, fallbackResults);
+        // Send fallback results to webhook (with empty contact info)
+        handleWebhookSubmission({
+          contactInfo: { name: "", email: "", phone: "" },
+          businessName: ""
+        }, fallbackResults);
       } finally {
         setLoading(false);
       }

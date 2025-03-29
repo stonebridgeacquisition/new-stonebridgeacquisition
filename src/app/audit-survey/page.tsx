@@ -282,9 +282,9 @@ export default function AuditSurvey() {
     // For contact info, validate required fields
     if (currentQuestion.type === "contact-info") {
       // Trim inputs to prevent whitespace-only values
-      const trimmedName = contactInfo.name?.trim() || "";
-      const trimmedEmail = contactInfo.email?.trim() || "";
-      const trimmedPhone = contactInfo.phone?.trim() || "";
+      const trimmedName = (contactInfo.name || "").trim();
+      const trimmedEmail = (contactInfo.email || "").trim();
+      const trimmedPhone = (contactInfo.phone || "").trim();
       
       // Check if required fields are filled
       if (!trimmedName || !trimmedEmail) {
@@ -299,7 +299,7 @@ export default function AuditSurvey() {
         return;
       }
 
-      // Save trimmed contact info to answers
+      // Save trimmed contact info to answers, making sure to never use "None" as a value
       setAnswers({
         ...answers,
         [currentQuestion.id]: {
@@ -307,6 +307,13 @@ export default function AuditSurvey() {
           email: trimmedEmail === "None" ? "" : trimmedEmail,
           phone: trimmedPhone === "None" ? "" : trimmedPhone
         },
+      });
+      
+      // Log the contact info to make sure it's captured correctly
+      console.log("Contact info saved:", {
+        name: trimmedName === "None" ? "" : trimmedName,
+        email: trimmedEmail === "None" ? "" : trimmedEmail,
+        phone: trimmedPhone === "None" ? "" : trimmedPhone
       });
     }
 
@@ -329,16 +336,37 @@ export default function AuditSurvey() {
 
   // Handle contact info changes
   const handleContactInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    // Prevent "None" from being used as a value
+    const cleanValue = value === "None" ? "" : value;
+    
     setContactInfo({
       ...contactInfo,
-      [e.target.name]: e.target.value,
+      [name]: cleanValue,
     });
+    
+    // Log each change for debugging
+    console.log(`Contact info updated - ${name}: ${cleanValue}`);
   };
 
   // Handle submit survey
   const handleSubmitSurvey = () => {
     // Here you would typically submit to your backend
-    console.log("Survey answers:", answers);
+    console.log("Survey answers to be submitted:", answers);
+    
+    // Ensure contact info is properly handled
+    if (answers[12]) { // Question ID 12 is the contact info
+      const contactInfo = answers[12];
+      console.log("Contact information being sent:", contactInfo);
+      
+      // Verify email format for logging purposes
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(contactInfo.email)) {
+        console.warn("Warning: Invalid email format detected:", contactInfo.email);
+      }
+    } else {
+      console.warn("Warning: No contact information found in survey answers");
+    }
     
     // Store answers in sessionStorage for the thank you page to access
     try {
@@ -347,6 +375,7 @@ export default function AuditSurvey() {
       
       // Store in sessionStorage as a backup
       sessionStorage.setItem('surveyData', encodedData);
+      console.log("Survey data saved to sessionStorage successfully");
       
       // Redirect to thank you page with data in URL
       router.push(`/audit-survey/thank-you?data=${encodedData}`);

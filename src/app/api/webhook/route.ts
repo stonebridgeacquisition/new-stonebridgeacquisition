@@ -12,13 +12,18 @@ export async function POST(request: Request) {
     const webhookUrl = 'https://hook.eu2.make.com/r7pft94pmuvul4b7t567fwz3ylfq8fn4';
     console.log(`Forwarding request to Make.com webhook: ${webhookUrl}`);
     
+    // Clean potential "None" values from contact information
+    const cleanName = data.name === "None" ? "" : (data.name || "");
+    const cleanEmail = data.email === "None" ? "" : (data.email || "");
+    const cleanBusinessName = data.business_name === "None" ? "" : (data.business_name || "");
+    
     // Create a simplified payload - only send what's absolutely needed
     // Make.com sometimes rejects complex nested structures
     const simplePayload = {
       // User contact information (required)
-      name: data.name || "",
-      email: data.email || "",
-      business_name: data.business_name || "",
+      name: cleanName,
+      email: cleanEmail,
+      business_name: cleanBusinessName,
       
       // Main data points needed
       automation_opportunities: Array.isArray(data.automation_opportunities) 
@@ -40,7 +45,7 @@ export async function POST(request: Request) {
             : "")
     };
     
-    // Log the simplified payload
+    // Log the cleaned payload
     console.log('Sending simplified payload to webhook:', JSON.stringify(simplePayload));
     
     // Forward the request to Make.com
