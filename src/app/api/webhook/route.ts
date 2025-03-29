@@ -12,28 +12,36 @@ export async function POST(request: Request) {
     const webhookUrl = 'https://hook.eu2.make.com/r7pft94pmuvul4b7t567fwz3ylfq8fn4';
     console.log(`Forwarding request to Make.com webhook: ${webhookUrl}`);
     
-    // Make sure we have properly formatted data
-    const formattedData = {
+    // Create a simplified payload - only send what's absolutely needed
+    // Make.com sometimes rejects complex nested structures
+    const simplePayload = {
       // User contact information (required)
       name: data.name || "",
       email: data.email || "",
       business_name: data.business_name || "",
-      phone: data.phone || "",
       
-      // Audit results
-      audit_score: data.audit_score,
-      automation_opportunities: data.automation_opportunities || [],
-      recommended_tools: data.recommended_tools || [],
-      time_estimate: data.time_estimate || "",
-      cost_savings_estimate: data.cost_savings_estimate || "",
-      top_priorities: data.top_priorities || [],
+      // Main data points needed
+      automation_opportunities: Array.isArray(data.automation_opportunities) 
+        ? data.automation_opportunities 
+        : (typeof data.automation_opportunities_text === 'string' 
+            ? data.automation_opportunities_text 
+            : ""),
       
-      // Include formatted audit summary if available
-      formatted_audit_summary: data.formatted_audit_summary || "",
+      recommended_tools: Array.isArray(data.recommended_tools) 
+        ? data.recommended_tools 
+        : (typeof data.recommended_tools_text === 'string' 
+            ? data.recommended_tools_text 
+            : ""),
       
-      // Include survey data if available
-      survey_data: data.survey_data || {}
+      top_priorities: Array.isArray(data.top_priorities) 
+        ? data.top_priorities 
+        : (typeof data.top_priorities_text === 'string' 
+            ? data.top_priorities_text 
+            : "")
     };
+    
+    // Log the simplified payload
+    console.log('Sending simplified payload to webhook:', JSON.stringify(simplePayload));
     
     // Forward the request to Make.com
     const response = await fetch(webhookUrl, {
@@ -41,7 +49,7 @@ export async function POST(request: Request) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formattedData),
+      body: JSON.stringify(simplePayload),
     });
     
     // Check if the response is successful
@@ -49,26 +57,18 @@ export async function POST(request: Request) {
       const errorText = await response.text();
       console.error(`Error from Make.com webhook: Status ${response.status}, Body: ${errorText}`);
       
-      // Log all response headers for debugging
-      console.log('Response headers:', Object.fromEntries([...response.headers.entries()]));
-      
+      // Return detailed error for debugging
       return NextResponse.json(
         { error: `Failed to send data to webhook: ${response.status}`, details: errorText },
         { status: response.status }
       );
     }
     
-    // Try to get the response body for debugging
-    let responseBody = '';
-    try {
-      responseBody = await response.text();
-      console.log('Response from Make.com:', responseBody);
-    } catch (err) {
-      console.log('Could not read response body');
-    }
-    
     // Return success response
-    return NextResponse.json({ success: true, response: responseBody || 'OK', webhookUsed: webhookUrl });
+    return NextResponse.json({ 
+      success: true, 
+      message: 'Data successfully sent to webhook'
+    });
   } catch (error) {
     console.error('Error in webhook proxy:', error);
     return NextResponse.json(

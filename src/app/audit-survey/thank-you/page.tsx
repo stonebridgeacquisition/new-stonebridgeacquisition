@@ -33,73 +33,21 @@ const sendToWebhook = async (surveyData: any, auditResults: AuditResult) => {
     // Extract user contact information
     const contactInfo = surveyData.contactInfo || {};
     
-    // Format the audit data into a more readable format for text fields
-    const formattedOpportunities = auditResults.automationOpportunities.map((opp, i) => 
-      `${i+1}. ${opp}`
-    ).join('\n');
-    
-    const formattedTools = auditResults.recommendedTools.map((tool, i) => 
-      `${i+1}. ${tool}`
-    ).join('\n');
-    
-    const formattedPriorities = auditResults.topPriorities.map((priority, i) => 
-      `${i+1}. ${priority}`
-    ).join('\n');
-    
-    // Create a simplifies payload with flat structure
+    // Create the absolute minimum payload needed for the webhook
+    // Keep it flat and simple - complex structures can cause 400 errors
     const payload = {
-      // User contact information (required fields for Make.com)
+      // User contact information
       name: contactInfo.name || "",
       email: contactInfo.email || "",
       business_name: surveyData.businessName || "",
-      phone: contactInfo.phone || "",
       
-      // Key metrics 
-      audit_score: auditResults.overallScore,
-      time_estimate: auditResults.timeEstimate,
-      cost_savings_estimate: auditResults.costSavingsEstimate,
-      
-      // Main sections as text (improved compatibility)
-      automation_opportunities_text: formattedOpportunities,
-      recommended_tools_text: formattedTools,
-      top_priorities_text: formattedPriorities,
-      
-      // Also send as arrays for more complex scenarios
-      automation_opportunities: auditResults.automationOpportunities,
-      recommended_tools: auditResults.recommendedTools,
-      top_priorities: auditResults.topPriorities,
-      
-      // Comprehensive text summary for easy reading in Make.com
-      summary: `
-Business: ${surveyData.businessName || "Not specified"}
-Contact: ${contactInfo.name || ""} (${contactInfo.email || ""})
-Phone: ${contactInfo.phone || "Not provided"}
-        
-AUTOMATION READINESS SCORE: ${auditResults.overallScore}%
-ESTIMATED TIME SAVINGS: ${auditResults.timeEstimate}
-POTENTIAL COST SAVINGS: ${auditResults.costSavingsEstimate}
-
-TOP AUTOMATION OPPORTUNITIES:
-${formattedOpportunities}
-
-RECOMMENDED TOOLS & TECHNOLOGIES:
-${formattedTools}
-
-NEXT STEPS & PRIORITIES:
-${formattedPriorities}
-      `,
-      
-      // Add key survey data fields directly to the root
-      bottlenecks: surveyData.bottlenecks || [],
-      using_ai: surveyData.usingAI || "",
-      current_tools: surveyData.currentTools || "",
-      revenue: surveyData.revenue || "",
-      team_size: surveyData.teamSize || "",
-      timeline: surveyData.timeline || "",
-      budget: surveyData.budget || ""
+      // The 3 key data points requested
+      automation_opportunities: auditResults.automationOpportunities || [],
+      recommended_tools: auditResults.recommendedTools || [],
+      top_priorities: auditResults.topPriorities || [],
     };
     
-    console.log("Sending simplified payload to webhook via proxy");
+    console.log("Sending simplified payload to webhook:", JSON.stringify(payload));
     
     // Send data to our proxy endpoint
     const response = await fetch(proxyUrl, {
@@ -111,9 +59,9 @@ ${formattedPriorities}
     });
     
     if (!response.ok) {
-      const errorData = await response.text();
+      const errorData = await response.json().catch(() => response.text());
       console.error("Webhook error response:", errorData);
-      throw new Error(`Failed to send data to webhook: ${response.status} - ${errorData}`);
+      throw new Error(`Failed to send data to webhook: ${response.status}`);
     }
     
     console.log("Successfully sent results to webhook");
