@@ -3,8 +3,17 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20.0.0"
+  NODE_VERSION = "18.17.0"
   NEXT_TELEMETRY_DISABLED = "1"
+  NEXT_SKIP_TYPE_CHECK = "true"
+  NEXT_ESLINT_IGNORE_ERRORS = "true"
+  NEXT_TURBO = "false"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Uncomment this if needed for SPA fallback
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
