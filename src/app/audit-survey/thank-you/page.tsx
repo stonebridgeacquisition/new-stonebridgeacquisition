@@ -806,7 +806,7 @@ function AuditResultsContent() {
     }
   }, [auditResults, surveyData]);
 
-    return (
+  return (
     <main className="min-h-screen bg-maroon-50/50 bg-[url('/images/bg-pattern.svg')] bg-fixed">
       {/* Contact Information Section */}
       <div className="bg-white shadow-sm border-b border-maroon-200">

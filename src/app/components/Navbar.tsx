@@ -37,7 +37,7 @@ export function Navbar() {
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="hidden md:inline-flex"
             >
-              {theme === "dark&quot; ? (
+              {theme === "dark" ? (
                 <svg
                   className="h-5 w-5"
                   fill="none"

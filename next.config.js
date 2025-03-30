@@ -9,8 +9,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   // Other Next.js configuration
-  reactStrictMode: true,
-  swcMinify: true,
+  reactStrictMode: true
 };
 
 module.exports = nextConfig; 

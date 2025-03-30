@@ -12,7 +12,7 @@ interface GradientTextProps extends HTMLMotionProps<"div"> {
 function GradientText({
   className,
   children,
-  as: Component = "span&quot;,
+  as: Component = "span",
   ...props
 }: GradientTextProps) {
   const MotionComponent = motion(Component);

@@ -29,7 +29,7 @@ export default function AboutPage() {
               About Us
             </h1>
             <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2 mt-4 mb-8">
-              <p className="font-thin text-maroon-800">We&#39;re a digital solutions agency built for the modern business world.</p>
+              <p className="font-thin text-maroon-800">We're a digital solutions agency built for the modern business world.</p>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function AboutPage() {
                       At our core, we help businesses unlock growth by automating what slows them down. From lead management and CRM systems to follow-ups and landing pages — we build AI-powered systems that save time, reduce manual work, and boost profits.
                     </p>
                     <p className="text-lg md:text-xl mt-6">
-                      We don't do cookie-cutter solutions. Every system we build is tailored to your business, your workflow, and your goals. Whether you&#39;re a startup, a growing team, or an established company, we help you scale faster — with less effort.
+                      We don't do cookie-cutter solutions. Every system we build is tailored to your business, your workflow, and your goals. Whether you're a startup, a growing team, or an established company, we help you scale faster — with less effort.
                     </p>
                   </div>
                 </CardContent>
@@ -178,7 +178,7 @@ export default function AboutPage() {
             <div className="mt-12 text-center">
               <div className="w-full h-px bg-black/10 mb-12"></div>
               <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
-                <p className="font-thin text-maroon-800 italic">"We're not just tech people — we&#39;re partners in your success.&quot;</p>
+                <p className="font-thin text-maroon-800 italic">"$5$6</p>
               </div>
               <div className="mt-8">
                 <GradientButton asChild className="text-lg">

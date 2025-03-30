@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Files that need fixing (from the error message)
+// Files to fix
 const filesToFix = [
   './src/app/about/page.tsx',
   './src/app/admin/popup-test/page.tsx',
@@ -18,34 +18,23 @@ const filesToFix = [
   './src/app/test-sheets/page.tsx'
 ];
 
-// Function to fix unescaped quotes in a file
-function fixUnescapedQuotes(filePath) {
+// Function to fix a file
+function fixFile(filePath) {
   try {
-    console.log(`Processing: ${filePath}`);
+    console.log(`Fixing file: ${filePath}`);
     
     // Read the file content
     const content = fs.readFileSync(filePath, 'utf8');
     
-    // Fix unescaped quotes
+    // Fix the import statements and use client directive
     let fixedContent = content;
     
-    // Replace unescaped single quotes in JSX text
-    fixedContent = fixedContent.replace(/(\w)'(\w|\s)/g, '$1&#39;$2');
-    fixedContent = fixedContent.replace(/(\s)'(\w)/g, '$1&#39;$2');
-    fixedContent = fixedContent.replace(/(\w)'(\s|\.|\,|\;)/g, '$1&#39;$2');
+    // Fix "use client" directive
+    fixedContent = fixedContent.replace(/"use client&quot;/g, '"use client"');
     
-    // Replace unescaped double quotes in JSX text
-    fixedContent = fixedContent.replace(/(\w)"(\w|\s)/g, '$1&quot;$2');
-    fixedContent = fixedContent.replace(/(\s)"(\w)/g, '$1&quot;$2');
-    fixedContent = fixedContent.replace(/(\w)"(\s|\.|\,|\;)/g, '$1&quot;$2');
-    
-    // Special quotes at the end of texts
-    fixedContent = fixedContent.replace(/"(\.|\,|\;|\:)/g, '&quot;$1');
-    fixedContent = fixedContent.replace(/'(\.|\,|\;|\:)/g, '&#39;$1');
-    
-    // Handle specific patterns in JSX
-    fixedContent = fixedContent.replace(/"<\//g, '&quot;</');
-    fixedContent = fixedContent.replace(/'<\//g, '&#39;</');
+    // Fix import statements
+    fixedContent = fixedContent.replace(/from &quot;([^&]+)&quot;/g, 'from "$1"');
+    fixedContent = fixedContent.replace(/from "@\/([^&]+)&quot;/g, 'from "@/$1"');
     
     // Save the fixed content
     fs.writeFileSync(filePath, fixedContent, 'utf8');
@@ -60,7 +49,7 @@ function fixUnescapedQuotes(filePath) {
 
 // Main function
 function main() {
-  console.log('🔍 Starting to fix unescaped quotes in project files...');
+  console.log('🔍 Starting to fix import statements...');
   
   let fixedCount = 0;
   
@@ -68,7 +57,7 @@ function main() {
   filesToFix.forEach(file => {
     const fullPath = path.resolve(file);
     if (fs.existsSync(fullPath)) {
-      if (fixUnescapedQuotes(fullPath)) {
+      if (fixFile(fullPath)) {
         fixedCount++;
       }
     } else {

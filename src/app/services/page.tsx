@@ -54,7 +54,7 @@ export default function ServicesPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
             <p className="text-xl text-gray-600 mb-8">
-              Let&#39;s discuss how our AI-powered solutions can streamline your operations and boost your digital presence.
+              Let's discuss how our AI-powered solutions can streamline your operations and boost your digital presence.
             </p>
             <Button size="lg" asChild>
               <Link href="/contact">Get Started</Link>

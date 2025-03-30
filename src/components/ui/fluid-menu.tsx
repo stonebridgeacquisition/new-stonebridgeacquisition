@@ -93,7 +93,7 @@ export function MenuItem({
   // Different styles for the toggle button vs menu items
   const buttonClasses = isToggle 
     ? "flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-200 z-10"
-    : "flex items-center justify-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 hover:scale-110&quot;;
+    : "flex items-center justify-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 hover:scale-110";
   
   return (
     <div className="relative group">
