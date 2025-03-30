@@ -69,7 +69,7 @@ export default function ServicesPage() {
 const services = [
   {
     title: "Business Process Automation",
-    description: "Streamline your operations with intelligent automation solutions powered by AI.&quot;,
+    description: "Streamline your operations with intelligent automation solutions powered by AI.",
     icon: (
       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -84,7 +84,7 @@ const services = [
   },
   {
     title: "Digital Presence Enhancement",
-    description: "Build and optimize your digital presence for maximum impact and engagement.&quot;,
+    description: "Build and optimize your digital presence for maximum impact and engagement.",
     icon: (
       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -99,7 +99,7 @@ const services = [
   },
   {
     title: "AI-Powered Analytics",
-    description: "Harness the power of data with advanced analytics and AI-driven insights.&quot;,
+    description: "Harness the power of data with advanced analytics and AI-driven insights.",
     icon: (
       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -114,7 +114,7 @@ const services = [
   },
   {
     title: "Custom Software Solutions",
-    description: "Develop tailored software solutions to meet your specific business needs.&quot;,
+    description: "Develop tailored software solutions to meet your specific business needs.",
     icon: (
       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -124,7 +124,7 @@ const services = [
       "Custom application development",
       "API integration",
       "Cloud solutions",
-      "Mobile applications&quot;
+      "Mobile applications"
     ]
   }
 ]; 

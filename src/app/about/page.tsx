@@ -204,5 +204,5 @@ const expertise = [
   "CRM & Lead Management Systems",
   "AI Implementation for Business Growth",
   "Digital Transformation Strategy",
-  "Custom Web & Mobile Solutions&quot;
+  "Custom Web & Mobile Solutions"
 ]; 

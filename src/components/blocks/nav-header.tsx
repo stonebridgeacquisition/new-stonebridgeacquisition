@@ -55,30 +55,30 @@ export function NavHeader({ className }: NavHeaderProps) {
       <div className="fixed top-3 right-3 z-50">
         <div className={`p-1.5 rounded-full ${scrolled ? 'bg-white/90 backdrop-blur-sm shadow-md border border-maroon-100/30' : ''} transition-all duration-300`}>
           <MenuContainer>
-            <MenuItem icon={<MenuIcon size={20} strokeWidth={2} className="text-maroon-800" />} label="Menu&quot; />
+            <MenuItem icon={<MenuIcon size={20} strokeWidth={2} className="text-maroon-800" />} label="Menu" />
             <MenuItem
               icon={<Home size={20} strokeWidth={2} className={`${pathname === "/" ? "text-maroon-700" : "text-maroon-500"}`} />}
               href="/"
               isActive={pathname === "/"}
-              label="Home&quot;
+              label="Home"
             />
             <MenuItem
               icon={<FileText size={20} strokeWidth={2} className={`${pathname === "/audit-survey" ? "text-maroon-700" : "text-maroon-500"}`} />}
               href="/audit-survey"
               isActive={pathname === "/audit-survey"}
-              label="Free AI Audit&quot;
+              label="Free AI Audit"
             />
             <MenuItem
               icon={<User size={20} strokeWidth={2} className={`${pathname === "/about" ? "text-maroon-700" : "text-maroon-500"}`} />}
               href="/about"
               isActive={pathname === "/about"}
-              label="About&quot;
+              label="About"
             />
             <MenuItem
               icon={<Mail size={20} strokeWidth={2} className={`${pathname === "/contact" ? "text-maroon-700" : "text-maroon-500"}`} />}
               href="/contact"
               isActive={pathname === "/contact"}
-              label="Contact&quot;
+              label="Contact"
             />
           </MenuContainer>
         </div>

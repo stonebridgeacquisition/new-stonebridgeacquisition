@@ -64,7 +64,7 @@ export default function ContactPage() {
       console.error("Error submitting form:", error);
       // Even on error, show success to the user
       setSubmitted(true);
-      setFormData({ name: "", email: "", company: "", message: "&quot; });
+      setFormData({ name: "", email: "", company: "", message: "" });
     } finally {
       setIsSubmitting(false);
     }
@@ -114,7 +114,7 @@ export default function ContactPage() {
                       <div className="text-center mt-8">
                         <GradientButton 
                           onClick={() => setSubmitted(false)}
-                          className="text-base&quot;
+                          className="text-base"
                         >
                           Send Another Message
                         </GradientButton>
@@ -191,7 +191,7 @@ export default function ContactPage() {
                           disabled={isSubmitting}
                           className="w-full text-base"
                         >
-                          {isSubmitting ? "Sending..." : "Send Message&quot;}
+                          {isSubmitting ? "Sending..." : "Send Message"}
                         </GradientButton>
                       </div>
                     </form>

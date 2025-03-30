@@ -45,7 +45,7 @@ export function GooeyText({
         text2Ref.current.style.filter = ""
         text2Ref.current.style.opacity = "100%"
         text1Ref.current.style.filter = ""
-        text1Ref.current.style.opacity = "0%&quot;
+        text1Ref.current.style.opacity = "0%"
       }
     }
 

@@ -124,7 +124,7 @@ class Noise {
 
 export function Waves({
   lineColor = "hsl(var(--foreground))",
-  backgroundColor = "transparent&quot;,
+  backgroundColor = "transparent",
   waveSpeedX = 0.0125,
   waveSpeedY = 0.005,
   waveAmpX = 32,
@@ -164,7 +164,7 @@ export function Waves({
     const canvas = canvasRef.current
     const container = containerRef.current
     if (!canvas || !container) return
-    ctxRef.current = canvas.getContext("2d&quot;)
+    ctxRef.current = canvas.getContext("2d")
 
     function setSize() {
       const rect = container.getBoundingClientRect()
@@ -338,7 +338,7 @@ export function Waves({
     return () => {
       window.removeEventListener("resize", onResize)
       window.removeEventListener("mousemove", onMouseMove)
-      window.removeEventListener("touchmove&quot;, onTouchMove)
+      window.removeEventListener("touchmove", onTouchMove)
     }
   }, [
     lineColor,

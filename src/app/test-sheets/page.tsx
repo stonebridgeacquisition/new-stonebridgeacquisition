@@ -59,7 +59,7 @@ export default function TestSheetsPage() {
       
       console.log("Test completed successfully");
     } catch (error) {
-      console.error("Error during test:&quot;, error);
+      console.error("Error during test:", error);
       setResult({
         error: String(error),
       });
@@ -83,7 +83,7 @@ export default function TestSheetsPage() {
             </div>
             
             <Button type="submit" disabled={loading}>
-              {loading ? "Testing..." : "Run Test&quot;}
+              {loading ? "Testing..." : "Run Test"}
             </Button>
             
             {result && (
