@@ -158,7 +158,7 @@ export default function AuditSurvey() {
     company: "",
   });
   // State for "other" responses
-  const [otherResponse, setOtherResponse] = useState("");
+  const [otherResponse, setOtherResponse] = useState("&quot;);
   // State for text inputs
   const [textInputs, setTextInputs] = useState<Record<string, string>>({});
 
@@ -186,7 +186,7 @@ export default function AuditSurvey() {
       // Move to next question after selection
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setOtherResponse(""); // Reset other response for next question
+        setOtherResponse("&quot;); // Reset other response for next question
       }, 300);
     }
   };
@@ -256,7 +256,7 @@ export default function AuditSurvey() {
     }
 
     // For text-input, validate required fields
-    if (currentQuestion.type === "text-input" && currentQuestion.fields) {
+    if (currentQuestion.type === "text-input&quot; && currentQuestion.fields) {
       let isValid = true;
       const textInputAnswers: Record<string, string> = {};
       
@@ -306,7 +306,7 @@ export default function AuditSurvey() {
       }));
       
       // Log for debugging
-      console.log("Contact info saved for question 12:", {
+      console.log("Contact info saved for question 12:&quot;, {
         name: contactInfo.name,
         email: contactInfo.email,
         phone: contactInfo.phone
@@ -347,8 +347,8 @@ export default function AuditSurvey() {
       router.push(`/audit-survey/thank-you?data=${encodedData}`);
     } catch (error) {
       console.error("Error storing survey data:", error);
-      // Fallback to basic redirect if there's an error
-      router.push("/audit-survey/thank-you");
+      // Fallback to basic redirect if there&#39;s an error
+      router.push("/audit-survey/thank-you&quot;);
     }
   };
 
@@ -392,7 +392,7 @@ export default function AuditSurvey() {
                 </h2>
 
                 {/* Different input types based on question type */}
-                {currentQuestion.type === "single-select" && (
+                {currentQuestion.type === "single-select&quot; && (
                   <div className="space-y-3">
                     {currentQuestion.options?.map((option, index) => (
                       <div 
@@ -401,7 +401,7 @@ export default function AuditSurvey() {
                         className={`p-4 border rounded-md cursor-pointer transition-all ${
                           answers[currentQuestion.id] === option 
                             ? "border-black bg-black text-white" 
-                            : "border-gray-200 hover:border-gray-400"
+                            : "border-gray-200 hover:border-gray-400&quot;
                         }`}
                       >
                         <div className="flex items-start gap-3">
@@ -418,7 +418,7 @@ export default function AuditSurvey() {
                         </div>
 
                         {/* Other input field */}
-                        {option.includes("Other") && answers[currentQuestion.id] === option && (
+                        {option.includes("Other&quot;) && answers[currentQuestion.id] === option && (
                           <div className="mt-3 ml-8">
                             <input
                               type="text"
@@ -434,7 +434,7 @@ export default function AuditSurvey() {
                   </div>
                 )}
 
-                {currentQuestion.type === "multi-select" && (
+                {currentQuestion.type === "multi-select&quot; && (
                   <div className="space-y-3">
                     {currentQuestion.options?.map((option, index) => {
                       const isSelected = (answers[currentQuestion.id] || []).includes(option);
@@ -445,7 +445,7 @@ export default function AuditSurvey() {
                           className={`p-4 border rounded-md cursor-pointer transition-all ${
                             isSelected 
                               ? "border-black bg-black text-white" 
-                              : "border-gray-200 hover:border-gray-400"
+                              : "border-gray-200 hover:border-gray-400&quot;
                           }`}
                         >
                           <div className="flex items-start gap-3">
@@ -464,7 +464,7 @@ export default function AuditSurvey() {
                           </div>
 
                           {/* Other input field */}
-                          {option.includes("Other") && isSelected && (
+                          {option.includes("Other&quot;) && isSelected && (
                             <div className="mt-3 ml-8">
                               <input
                                 type="text"
@@ -481,7 +481,7 @@ export default function AuditSurvey() {
                   </div>
                 )}
 
-                {currentQuestion.type === "text-input" && currentQuestion.fields && (
+                {currentQuestion.type === "text-input&quot; && currentQuestion.fields && (
                   <div className="space-y-4">
                     {currentQuestion.fields.map((field, index) => (
                       <div key={index}>
@@ -493,7 +493,7 @@ export default function AuditSurvey() {
                           value={textInputs[field.name] || ""}
                           onChange={(e) => handleTextInputChange(field.name, e.target.value)}
                           placeholder={field.label}
-                          className="w-full p-3 border border-maroon-200 rounded-md focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600"
+                          className="w-full p-3 border border-maroon-200 rounded-md focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600&quot;
                           required={field.required}
                         />
                       </div>
@@ -501,7 +501,7 @@ export default function AuditSurvey() {
                   </div>
                 )}
 
-                {currentQuestion.type === "contact-info" && (
+                {currentQuestion.type === "contact-info&quot; && (
                   <div className="space-y-4">
                     <div>
                       <label className="block text-maroon-800 mb-1">Full Name *</label>
@@ -555,14 +555,14 @@ export default function AuditSurvey() {
                   <div>{/* Empty div for flexbox spacing */}</div>
                 )}
 
-                {currentQuestion.type === "single-select" ? (
+                {currentQuestion.type === "single-select&quot; ? (
                   <div>{/* No next button for single-select as it auto-advances */}</div>
                 ) : (
                   <GradientButton
                     onClick={handleNextQuestion}
                     className="py-2 px-8"
                   >
-                    {currentQuestionIndex === surveyQuestions.length - 1 ? "Submit" : "Next"}
+                    {currentQuestionIndex === surveyQuestions.length - 1 ? "Submit" : "Next&quot;}
                   </GradientButton>
                 )}
               </div>

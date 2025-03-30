@@ -36,7 +36,7 @@ export interface GradientButtonProps
 
 const GradientButton = React.forwardRef<HTMLButtonElement, GradientButtonProps>(
   ({ className, variant, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+    const Comp = asChild ? Slot : "button&quot;
     return (
       <Comp
         className={cn(gradientButtonVariants({ variant, className }))}
@@ -46,6 +46,6 @@ const GradientButton = React.forwardRef<HTMLButtonElement, GradientButtonProps>(
     )
   }
 )
-GradientButton.displayName = "GradientButton"
+GradientButton.displayName = "GradientButton&quot;
 
 export { GradientButton, gradientButtonVariants } 

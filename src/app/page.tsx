@@ -58,7 +58,7 @@ export default function Home() {
             <div className="w-full h-px bg-black/10 mb-12"></div>
             <div className="text-center">
               <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
-                <p className="font-thin text-maroon-800 italic">"You'll walk away with a clear, personalized action plan — no fluff, no jargon."</p>
+                <p className="font-thin text-maroon-800 italic">"You&#39;ll walk away with a clear, personalized action plan — no fluff, no jargon.&quot;</p>
               </div>
             </div>
             
@@ -133,7 +133,7 @@ export default function Home() {
                   <p className="font-thin text-maroon-800 mb-1">
                     We help you <span className="font-semibold text-maroon-900">automate</span> and <span className="font-semibold text-maroon-900">optimize</span>
                   </p>
-                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">"using tailored AI solutions for your industry."</p>
+                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">"using tailored AI solutions for your industry.&quot;</p>
                 </div>
                 
                 {/* Desktop version */}
@@ -144,7 +144,7 @@ export default function Home() {
                     <p className="font-thin text-maroon-800">and</p>
                     <p className="font-semibold text-maroon-900">optimize</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"using tailored AI solutions for your industry."</p>
+                  <p className="font-thin text-maroon-800 italic">"using tailored AI solutions for your industry.&quot;</p>
                 </div>
                 
                 <div className="mt-6 md:mt-8">
@@ -170,7 +170,7 @@ export default function Home() {
               
               {/* Mobile-optimized subtitle */}
               <div className="md:hidden tracking-tighter text-center text-lg px-2">
-                <p className="font-thin text-maroon-800 mb-1">We'll build the <span className="font-semibold text-maroon-900">systems</span></p>
+                <p className="font-thin text-maroon-800 mb-1">We&#39;ll build the <span className="font-semibold text-maroon-900">systems</span></p>
                 <p>
                   <span className="font-thin text-maroon-800">so you can focus on </span>
                   <span className="font-semibold text-maroon-900">closing deals</span>
@@ -180,7 +180,7 @@ export default function Home() {
               {/* Desktop subtitle */}
               <div className="hidden md:flex md:text-2xl tracking-tighter flex-col items-center gap-2">
                 <div className="flex gap-2">
-                  <p className="font-thin text-maroon-800">We'll build the</p>
+                  <p className="font-thin text-maroon-800">We&#39;ll build the</p>
                   <p className="font-semibold text-maroon-900">systems</p>
                 </div>
                 <div className="flex gap-2">
@@ -215,7 +215,7 @@ export default function Home() {
                   <p className="font-thin text-maroon-800 mb-1">
                     <span className="font-semibold text-maroon-900">Done-For-You</span> or <span className="font-semibold text-maroon-900">Hybrid Support</span>
                   </p>
-                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">"– your choice."</p>
+                  <p className="font-thin text-maroon-800 italic mt-2 mb-3">"– your choice.&quot;</p>
                 </div>
                 
                 {/* Desktop version */}
@@ -225,7 +225,7 @@ export default function Home() {
                     <p className="font-thin text-maroon-800">or</p>
                     <p className="font-semibold text-maroon-900">Hybrid Support</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"– your choice."</p>
+                  <p className="font-thin text-maroon-800 italic">"– your choice.&quot;</p>
                 </div>
                 
                 <div className="mt-6 md:mt-8">
@@ -250,7 +250,7 @@ export default function Home() {
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
                 <div className="flex gap-2">
-                  <p className="font-thin text-maroon-800">Here's What</p>
+                  <p className="font-thin text-maroon-800">Here&#39;s What</p>
                   <p className="font-semibold text-maroon-900">Our Clients</p>
                   <p className="font-thin text-maroon-800">Say:</p>
                 </div>
@@ -270,14 +270,14 @@ export default function Home() {
                 <p className="font-thin text-maroon-800">These are just a few success stories from</p>
                 <div className="flex gap-2">
                   <p className="font-semibold text-maroon-900">businesses</p>
-                  <p className="font-thin text-maroon-800">we've helped</p>
+                  <p className="font-thin text-maroon-800">we&#39;ve helped</p>
                 </div>
                 <div className="flex gap-2">
                   <p className="font-semibold text-maroon-900">automate</p>
                   <p className="font-thin text-maroon-800">and</p>
                   <p className="font-semibold text-maroon-900">grow.</p>
                 </div>
-                <p className="font-thin text-maroon-800 italic">"Your story could be next."</p>
+                <p className="font-thin text-maroon-800 italic">"Your story could be next.&quot;</p>
               </div>
               <div className="mt-8">
                 <GradientButton asChild className="text-lg">
@@ -296,7 +296,7 @@ export default function Home() {
             {/* Centered Heading */}
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-maroon-900 mb-4">
-                Worried It Won't Work for You?
+                Worried It Won&#39;t Work for You?
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
                 <div className="flex gap-2">
@@ -318,7 +318,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-maroon-900 text-lg mb-2">30-Day Risk-Free Guarantee</h3>
-                      <p className="text-maroon-800">If you're not satisfied, you don't pay</p>
+                      <p className="text-maroon-800">If you're not satisfied, you don&#39;t pay</p>
                     </div>
                   </div>
                 </CardContent>
@@ -334,7 +334,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-maroon-900 text-lg mb-2">Results Guarantee</h3>
-                      <p className="text-maroon-800">We'll keep working with you until you see real results</p>
+                      <p className="text-maroon-800">We&#39;ll keep working with you until you see real results</p>
                     </div>
                   </div>
                 </CardContent>
@@ -355,7 +355,7 @@ export default function Home() {
                     <p className="font-semibold text-maroon-900">automation</p>
                     <p className="font-thin text-maroon-800">to gain.</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"Nothing to lose, everything to gain."</p>
+                  <p className="font-thin text-maroon-800 italic">"Nothing to lose, everything to gain.&quot;</p>
                 </div>
                 <div className="mt-8">
                   <GradientButton asChild className="text-lg">
@@ -424,7 +424,7 @@ export default function Home() {
                     <p className="font-thin text-maroon-800">All included,</p>
                     <p className="font-semibold text-maroon-900">completely free,</p>
                   </div>
-                  <p className="font-thin text-maroon-800 italic">"when you partner with us."</p>
+                  <p className="font-thin text-maroon-800 italic">"when you partner with us.&quot;</p>
                 </div>
                 <div className="mt-8">
                   <GradientButton asChild className="text-lg">
@@ -444,12 +444,12 @@ export default function Home() {
             {/* Centered Heading */}
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-maroon-900 mb-4">
-                Ready to Start? Don't Wait.
+                Ready to Start? Don&#39;t Wait.
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-4">
                 <div className="flex items-center gap-2 text-maroon-900">
                   <span className="text-2xl md:text-3xl">⚠️</span>
-                  <p className="font-semibold">We're only accepting 10 new clients this month</p>
+                  <p className="font-semibold">We&#39;re only accepting 10 new clients this month</p>
                 </div>
               </div>
             </div>
@@ -458,7 +458,7 @@ export default function Home() {
               <div className="w-full h-px bg-black/10 mb-12"></div>
               <div className="text-center">
                 <div className="text-xl md:text-2xl lg:text-3xl tracking-tighter flex flex-col items-center gap-2">
-                  <p className="font-thin text-maroon-800 italic">"Every day you wait, your competitors get ahead with AI. Don't miss your chance to automate and grow."</p>
+                  <p className="font-thin text-maroon-800 italic">"Every day you wait, your competitors get ahead with AI. Don&#39;t miss your chance to automate and grow.&quot;</p>
                 </div>
                 <div className="mt-8">
                   <GradientButton asChild className="text-lg">
@@ -481,7 +481,7 @@ export default function Home() {
                 Want to Automate & Scale Your Business?
               </h2>
               <div className="text-xl md:text-2xl tracking-tighter flex flex-col items-center gap-2">
-                <p className="font-thin text-maroon-800">Let's build your AI systems and help you grow faster.</p>
+                <p className="font-thin text-maroon-800">Let&#39;s build your AI systems and help you grow faster.</p>
               </div>
             </div>
 
@@ -500,7 +500,7 @@ export default function Home() {
 const auditFeatures = [
   {
     title: "Process Analysis",
-    description: "We analyze your current workflows and identify processes that can be enhanced through AI automation.",
+    description: "We analyze your current workflows and identify processes that can be enhanced through AI automation.&quot;,
     icon: (
       <svg className="w-6 h-6 text-maroon-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -509,7 +509,7 @@ const auditFeatures = [
   },
   {
     title: "AI Opportunity Map",
-    description: "Get a detailed map of where AI can create the most impact in your business operations.",
+    description: "Get a detailed map of where AI can create the most impact in your business operations.&quot;,
     icon: (
       <svg className="w-6 h-6 text-maroon-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -518,7 +518,7 @@ const auditFeatures = [
   },
   {
     title: "ROI Projection",
-    description: "Receive clear projections of potential cost savings and efficiency gains through AI implementation.",
+    description: "Receive clear projections of potential cost savings and efficiency gains through AI implementation.&quot;,
     icon: (
       <svg className="w-6 h-6 text-maroon-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -559,7 +559,7 @@ const TESTIMONIAL_DATA = [
     id: 2,
     name: "New Homes Consultants",
     avatar: "/images/NHC.jpg",
-    description: "What stood out the most was how easy it was to work with them. Clear communication, quick turnaround, and a deep understanding of what my business needed. Couldn't ask for more."
+    description: "What stood out the most was how easy it was to work with them. Clear communication, quick turnaround, and a deep understanding of what my business needed. Couldn&#39;t ask for more."
   },
   {
     id: 3,
@@ -588,6 +588,6 @@ const bonusFeatures = [
   },
   {
     title: "Priority Support Upgrade",
-    description: "Fast-track your success with premium support",
+    description: "Fast-track your success with premium support&quot;,
   }
 ];

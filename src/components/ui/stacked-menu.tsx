@@ -19,7 +19,7 @@ export function Menu({ trigger, children, align = "left", showChevron = true }: 
         onClick={() => setIsOpen(!isOpen)}
         className="cursor-pointer inline-flex items-center"
         role="button"
-        aria-haspopup="true"
+        aria-haspopup="true&quot;
         aria-expanded={isOpen}
       >
         {trigger}
@@ -121,7 +121,7 @@ export function MenuContainer({ children }: { children: React.ReactNode }) {
 
     document.addEventListener('click', handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('click&#39;, handleClickOutside);
     };
   }, [isExpanded]);
 

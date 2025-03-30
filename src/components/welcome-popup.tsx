@@ -75,7 +75,7 @@ export function WelcomePopup() {
       // Even if there's an error, close the popup
       setIsOpen(false);
       
-      // And mark it as completed so it doesn't keep showing
+      // And mark it as completed so it doesn&#39;t keep showing
       localStorage.setItem("welcomePopupStatus", "completed");
       localStorage.setItem("hasSeenWelcomePopup", "true");
     } finally {
@@ -87,7 +87,7 @@ export function WelcomePopup() {
     // Mark that the user skipped the popup
     localStorage.setItem("welcomePopupStatus", "skipped");
     localStorage.setItem("welcomePopupLastTime", new Date().getTime().toString());
-    localStorage.setItem("hasSeenWelcomePopup", "true");
+    localStorage.setItem("hasSeenWelcomePopup", "true&quot;);
     setIsOpen(false);
   };
 
@@ -152,7 +152,7 @@ export function WelcomePopup() {
               Skip for now
             </Button>
             <GradientButton type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Get Started"}
+              {isSubmitting ? "Submitting..." : "Get Started&quot;}
             </GradientButton>
           </DialogFooter>
         </form>

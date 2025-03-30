@@ -126,7 +126,7 @@ const TestimonialCarousel = React.forwardRef<
                   rotate: isCurrentCard ? exitX / 20 : isPrevCard ? -2 : -4,
                 }}
                 transition={{
-                  type: "spring",
+                  type: "spring&quot;,
                   stiffness: 300,
                   damping: 20,
                 }}
@@ -174,7 +174,7 @@ const TestimonialCarousel = React.forwardRef<
                     {testimonial.name}
                   </h3>
                   <p className="text-center text-base text-maroon-800 italic">
-                    "{testimonial.description}"
+                    "{testimonial.description}&quot;
                   </p>
                 </div>
               </motion.div>
@@ -207,6 +207,6 @@ const TestimonialCarousel = React.forwardRef<
     )
   },
 )
-TestimonialCarousel.displayName = "TestimonialCarousel"
+TestimonialCarousel.displayName = "TestimonialCarousel&quot;
 
 export { TestimonialCarousel, type Testimonial } 

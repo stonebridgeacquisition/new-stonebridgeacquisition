@@ -227,7 +227,7 @@ const bottleneckSolutions: Record<string, BottleneckSolution> = {
       "Data integration platform connecting all your business systems",
       "Automated data cleaning and standardization workflows",
       "AI-powered analytics dashboard with real-time insights",
-      "Automated report generation and distribution on schedule"
+      "Automated report generation and distribution on schedule&quot;
     ]
   }
 };
@@ -257,7 +257,7 @@ const budgetRecommendations: Record<string, string[]> = {
     "Complete audit → strategy → implementation",
     "Custom AI tools development",
     "90-day support and ongoing optimization",
-    "Dedicated automation specialist"
+    "Dedicated automation specialist&quot;
   ]
 };
 
@@ -325,12 +325,12 @@ const generateAIAudit = (surveyData: any): Promise<AuditResult> => {
       
       // Urgency affects recommendation approach
       if (surveyData.timeline === "ASAP (within a month)") {
-        result.topPriorities.push("Quick-win automation implementation focused on immediate ROI");
+        result.topPriorities.push("Quick-win automation implementation focused on immediate ROI&quot;);
       }
       
       // Analyze bottlenecks and apply specific recommendations
       if (surveyData.bottlenecks && Array.isArray(surveyData.bottlenecks)) {
-        // Track which bottlenecks we've processed to avoid duplicates
+        // Track which bottlenecks we&#39;ve processed to avoid duplicates
         const processedBottlenecks = new Set<string>();
         
         // Process each bottleneck with more precise matching
@@ -498,7 +498,7 @@ const generateAIAudit = (surveyData: any): Promise<AuditResult> => {
           "Conduct detailed workflow audit to identify automation opportunities",
           "Start with one high-impact automation project for quick ROI",
           "Implement time-tracking to measure automation effectiveness",
-          "Develop an AI implementation roadmap for the next 6-12 months"
+          "Develop an AI implementation roadmap for the next 6-12 months&quot;
         ];
       }
       
@@ -551,7 +551,7 @@ function AuditResultsContent() {
   const [auditResults, setAuditResults] = useState<AuditResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [surveyData, setSurveyData] = useState<any>(null);
-  const [webhookStatus, setWebhookStatus] = useState<"idle" | "success" | "error">("idle");
+  const [webhookStatus, setWebhookStatus] = useState<"idle" | "success" | "error">("idle&quot;);
   const [webhookError, setWebhookError] = useState<string | null>(null);
   const [showDebugInfo, setShowDebugInfo] = useState(false);
   const [downloading, setDownloading] = useState(false);
@@ -769,7 +769,7 @@ function AuditResultsContent() {
           setEditedContactInfo({
             name: userData.contactInfo.name || '',
             email: userData.contactInfo.email || '',
-            phone: userData.contactInfo.phone || ''
+            phone: userData.contactInfo.phone || '&#39;
           });
           
           // Generate AI audit results
@@ -789,7 +789,7 @@ function AuditResultsContent() {
           setLoading(false);
         }
       } catch (error) {
-        console.error("Error processing survey data:", error);
+        console.error("Error processing survey data:&quot;, error);
         setLoading(false);
       }
     };
@@ -861,19 +861,19 @@ function AuditResultsContent() {
             <div className="flex flex-wrap gap-4">
               <div className="text-sm">
                 <p className="text-xs text-maroon-600">Name:</p>
-                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.name || "Not provided"}</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.name || "Not provided&quot;}</p>
               </div>
               <div className="text-sm">
                 <p className="text-xs text-maroon-600">Email:</p>
-                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.email || "Not provided"}</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.email || "Not provided&quot;}</p>
               </div>
               <div className="text-sm">
                 <p className="text-xs text-maroon-600">Phone:</p>
-                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.phone || "Not provided"}</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.contactInfo?.phone || "Not provided&quot;}</p>
               </div>
               <div className="text-sm">
                 <p className="text-xs text-maroon-600">Business:</p>
-                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.businessName || "Not provided"}</p>
+                <p className="font-medium text-maroon-900 text-sm truncate">{surveyData?.businessName || "Not provided&quot;}</p>
               </div>
             </div>
           </div>
@@ -939,7 +939,7 @@ function AuditResultsContent() {
                 </h2>
                 
                         <p className="text-maroon-700 mb-4">
-                          Based on your survey responses, here's our assessment of your business's automation readiness
+                          Based on your survey responses, here's our assessment of your business&#39;s automation readiness
                           and the opportunities available to you.
                         </p>
                         
