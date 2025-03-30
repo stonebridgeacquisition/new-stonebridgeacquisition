@@ -37,10 +37,10 @@ const sendToWebhook = async (surveyData: any, auditResults: AuditResult) => {
       phone: surveyData.contactInfo?.phone || "",
       businessName: surveyData.businessName || "",
       industry: surveyData.industry || "",
-      bottlenecks: surveyData.bottlenecks || [],
+        bottlenecks: surveyData.bottlenecks || [],
       usingAI: surveyData.usingAI || "No",
       currentTools: surveyData.currentTools || "",
-      revenue: surveyData.revenue || "",
+        revenue: surveyData.revenue || "",
       timeOnManualTasks: surveyData.timeOnManualTasks || "",
       teamSize: surveyData.teamSize || "",
       score: auditResults.overallScore,
@@ -793,9 +793,9 @@ function AuditResultsContent() {
         setLoading(false);
       }
     };
-
+    
     if (loading) {
-      analyzeResults();
+    analyzeResults();
     }
   }, [searchParams, loading]);
   
@@ -806,7 +806,7 @@ function AuditResultsContent() {
     }
   }, [auditResults, surveyData]);
 
-  return (
+    return (
     <main className="min-h-screen bg-maroon-50/50 bg-[url('/images/bg-pattern.svg')] bg-fixed">
       {/* Contact Information Section */}
       <div className="bg-white shadow-sm border-b border-maroon-200">
@@ -902,7 +902,7 @@ function AuditResultsContent() {
         </div>
       ) : (
         <div className="py-12">
-          <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row gap-8">
             
               {/* Left column: Audit Score and Summary */}
@@ -913,11 +913,11 @@ function AuditResultsContent() {
                     <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
                       <div className="relative w-48 h-48">
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center">
+              <div className="text-center">
                             <h3 className="text-5xl font-bold text-maroon-900">{auditResults?.overallScore}%</h3>
                             <p className="text-maroon-600 text-sm mt-1">Automation Readiness</p>
-                          </div>
-                        </div>
+                </div>
+                </div>
                         <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
                           <circle cx="50" cy="50" r="40" fill="none" stroke="#E2D8D5" strokeWidth="8" />
                           <circle
@@ -931,13 +931,13 @@ function AuditResultsContent() {
                             strokeLinecap="round"
                           />
                         </svg>
-                      </div>
-                      
+              </div>
+              
                       <div className="flex-1">
                         <h2 className="text-2xl md:text-3xl font-bold text-maroon-900 mb-4">
                           Your Automation Audit Results
-                        </h2>
-                        
+                </h2>
+                
                         <p className="text-maroon-700 mb-4">
                           Based on your survey responses, here's our assessment of your business's automation readiness
                           and the opportunities available to you.
@@ -947,47 +947,47 @@ function AuditResultsContent() {
                           <div className="bg-maroon-50 p-3 rounded-lg">
                             <p className="text-xs text-maroon-600 font-medium">POTENTIAL TIME SAVINGS</p>
                             <p className="text-maroon-900 font-semibold">{auditResults?.timeEstimate}</p>
-                          </div>
+                </div>
                           <div className="bg-maroon-50 p-3 rounded-lg">
                             <p className="text-xs text-maroon-600 font-medium">POTENTIAL COST SAVINGS</p>
                             <p className="text-maroon-900 font-semibold">{auditResults?.costSavingsEstimate}</p>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    
+                </div>
+              </div>
+              
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="space-y-4">
                         <h3 className="text-lg font-semibold text-maroon-900 pb-2 border-b border-maroon-200">
-                          Top Automation Opportunities
-                        </h3>
+                    Top Automation Opportunities
+                  </h3>
                         <ul className="space-y-2">
-                          {auditResults?.automationOpportunities.map((opportunity, index) => (
+                    {auditResults?.automationOpportunities.map((opportunity, index) => (
                             <li key={index} className="flex items-start gap-2">
                               <div className="mt-1 bg-maroon-100 text-maroon-900 h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-medium">
                                 {index + 1}
-                              </div>
+                          </div>
                               <span className="text-maroon-800">{opportunity}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
                       <div className="space-y-4">
                         <h3 className="text-lg font-semibold text-maroon-900 pb-2 border-b border-maroon-200">
-                          Recommended Tools & Technologies
-                        </h3>
+                    Recommended Tools & Technologies
+                  </h3>
                         <ul className="space-y-2">
-                          {auditResults?.recommendedTools.map((tool, index) => (
+                    {auditResults?.recommendedTools.map((tool, index) => (
                             <li key={index} className="flex items-start gap-2">
                               <div className="mt-1 bg-maroon-100 text-maroon-900 h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-medium">
                                 {index + 1}
-                              </div>
+                        </div>
                               <span className="text-maroon-800">{tool}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -997,20 +997,20 @@ function AuditResultsContent() {
                   <CardContent className="p-8">
                     <h3 className="text-xl font-semibold text-maroon-900 mb-6">
                       Recommended Next Steps
-                    </h3>
+                  </h3>
                     
                     <div className="space-y-6">
-                      {auditResults?.topPriorities.map((priority, index) => (
+                    {auditResults?.topPriorities.map((priority, index) => (
                         <div key={index} className="flex items-start gap-4">
                           <div className="bg-maroon-100 text-maroon-900 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
                             {index + 1}
-                          </div>
+                        </div>
                           <div>
                             <p className="text-maroon-800 font-medium">{priority}</p>
                           </div>
                         </div>
                       ))}
-                    </div>
+                </div>
                   </CardContent>
                 </Card>
               </div>
@@ -1039,7 +1039,7 @@ function AuditResultsContent() {
                         >
                           Schedule Call
                         </a>
-                      </div>
+                </div>
                       
                       <div>
                         <h4 className="text-sm font-semibold text-maroon-800 mb-2">
@@ -1065,14 +1065,14 @@ function AuditResultsContent() {
                             </>
                           )}
                         </Button>
-                      </div>
-                    </div>
+                  </div>
+                </div>
                   </CardContent>
                 </Card>
-              </div>
             </div>
           </div>
         </div>
+      </div>
       )}
     </main>
   );
