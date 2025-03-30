@@ -1,0 +1,6 @@
+node_modules/
+.next/
+out/
+public/
+.git/
+next-env.d.ts 
